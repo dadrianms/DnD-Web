@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DnD Campañas - Tu Compendio Místico & Comunidad</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;700;900&family=MedievalSharp&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dnd: {
+                            bg: '#0D0805',
+                            dark: '#160F0A',
+                            card: '#22160F',
+                            border: '#422B1D',
+                            borderLight: '#6B472F',
+                            gold: '#FFC857',
+                            goldHover: '#E5AF3C',
+                            ember: '#FF5722',
+                            fire: '#FF8C00',
+                            parchment: '#F2E3C6',
+                            parchmentDark: '#C9B591',
+                            muted: '#9E8873'
+                        }
+                    },
+                    fontFamily: {
+                        title: ['Cinzel Decorative', 'serif'],
+                        heading: ['Cinzel', 'serif'],
+                        medieval: ['MedievalSharp', 'cursive'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'd20-glow': '0 0 35px -5px rgba(255, 140, 0, 0.6), 0 0 15px -2px rgba(255, 200, 87, 0.4)',
+                        'card-glow': '0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 87, 34, 0.15)',
+                        'inner-parchment': 'inset 0 0 40px rgba(66, 43, 29, 0.5)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0D0805;
+            color: #F2E3C6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Ambient glowing background noise texture */
+        .bg-wood-pattern {
+            background-image: radial-gradient(circle at 50% 20%, rgba(255, 87, 34, 0.12) 0%, rgba(13, 8, 5, 0.95) 70%),
+                              radial-gradient(circle at 80% 80%, rgba(255, 200, 87, 0.05) 0%, transparent 50%);
+        }
+
+        /* Parchment card look */
+        .parchment-box {
+            background: linear-gradient(135deg, #22160F 0%, #1A100B 100%);
+            border: 1px solid #422B1D;
+            position: relative;
+        }
+        .parchment-box:hover {
+            border-color: #FF8C00;
+            box-shadow: 0 0 20px rgba(255, 140, 0, 0.25);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0D0805;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #422B1D;
+            border-radius: 5px;
+            border: 2px solid #0D0805;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF8C00;
+        }
+    </style>
+</head>
+<body class="bg-wood-pattern min-h-screen text-dnd-parchment flex flex-col relative selection:bg-dnd-ember selection:text-white">
+
+    <!-- Canvas background for magical ember particles -->
+    <canvas id="emberCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-60"></canvas>
+
+    <!-- HEADER NAVBAR -->
+    <header class="sticky top-0 z-50 bg-dnd-dark/90 backdrop-blur-md border-b border-dnd-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo Brand -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-dnd-fire to-dnd-ember p-0.5 shadow-d20-glow flex items-center justify-center transition-transform group-hover:scale-105 overflow-hidden relative">
+                    <img src="icon-only_2.jpg" alt="DnD Campañas Logo" class="w-full h-full object-cover rounded-[7px]" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                    <!-- Fallback mini icon when image file is not found locally -->
+                    <div class="hidden flex items-center justify-center text-dnd-gold font-medieval text-xl font-bold">
+                        <i class="fa-solid fa-dragon"></i>
+                    </div>
+                </div>
+                <div>
+                    <span class="font-title text-xl sm:text-2xl text-dnd-gold tracking-wider block leading-none">DnD CAMPAÑAS</span>
+                    <span class="font-medieval text-xs text-dnd-fire tracking-widest uppercase">Portal del Aventurero</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-6 lg:gap-8 font-heading text-sm font-semibold tracking-wide">
+                <a href="#inicio" class="text-dnd-parchment hover:text-dnd-gold transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-house text-xs text-dnd-fire"></i> Inicio
+                </a>
+                <a href="#caracteristicas" class="text-dnd-parchment hover:text-dnd-gold transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-scroll text-xs text-dnd-fire"></i> Funciones
+                </a>
+                <a href="#biblioteca" class="text-dnd-parchment hover:text-dnd-gold transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-book-open text-xs text-dnd-fire"></i> Biblioteca
+                </a>
+                <a href="#devlog" class="text-dnd-parchment hover:text-dnd-gold transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-book-bookmark text-xs text-dnd-fire"></i> Actualizaciones
+                </a>
+                <a href="#comunidad" class="text-dnd-parchment hover:text-dnd-gold transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-comments text-xs text-dnd-fire"></i> Taberna
+                </a>
+            </nav>
+
+            <!-- CTA Beta Button Header -->
+            <div class="flex items-center gap-3">
+                <button onclick="openBetaModal()" class="relative group overflow-hidden rounded-lg p-[1px] font-heading font-bold text-xs sm:text-sm">
+                    <span class="absolute inset-0 bg-gradient-to-r from-dnd-fire via-dnd-gold to-dnd-ember rounded-lg animate-pulse"></span>
+                    <div class="relative px-4 py-2 sm:px-5 sm:py-2.5 bg-dnd-dark rounded-lg transition-colors group-hover:bg-opacity-80 flex items-center gap-2 text-dnd-gold">
+                        <i class="fa-brands fa-android text-base text-green-400"></i>
+                        <span>Unirse al Testeo</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow z-10">
+
+        <!-- HERO SECTION -->
+        <section id="inicio" class="relative pt-12 pb-20 md:pt-20 md:pb-32 px-4 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Content Left -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-dnd-ember/15 border border-dnd-fire/40 text-dnd-gold font-medieval text-sm">
+                        <span class="w-2 h-2 rounded-full bg-dnd-fire animate-ping"></span>
+                        <span>Fase de Pruebas Abierta para Android</span>
+                    </div>
+
+                    <h1 class="font-title text-3xl sm:text-5xl lg:text-6xl text-dnd-gold leading-tight drop-shadow-md">
+                        Toma el Control de tus <span class="text-transparent bg-clip-text bg-gradient-to-r from-dnd-fire via-dnd-gold to-amber-200">Aventuras</span>
+                    </h1>
+
+                    <p class="text-dnd-parchmentDark text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-sans leading-relaxed">
+                        Una herramienta sencilla de un jugador apasionado para otros jugadores apasionados.
+                    </p>
+
+                    <!-- Features highlights pills -->
+                    <div class="pt-2 flex flex-wrap justify-center lg:justify-start gap-4 text-xs font-medieval text-dnd-gold">
+                        <span class="bg-dnd-card border border-dnd-border px-3 py-1.5 rounded-md flex items-center gap-2">
+                            <i class="fa-solid fa-dice-d20 text-dnd-fire"></i> Fichas Interactivas
+                        </span>
+                        <span class="bg-dnd-card border border-dnd-border px-3 py-1.5 rounded-md flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-dnd-fire"></i> Tracker de Combate
+                        </span>
+                        <span class="bg-dnd-card border border-dnd-border px-3 py-1.5 rounded-md flex items-center gap-2">
+                            <i class="fa-solid fa-map text-dnd-fire"></i> Cuaderno del DM
+                        </span>
+                    </div>
+
+                    <!-- Call to action buttons -->
+                    <div class="pt-6 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <button onclick="openBetaModal()" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-dnd-fire to-dnd-ember hover:from-dnd-ember hover:to-dnd-fire text-white font-heading font-bold rounded-lg shadow-d20-glow transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-3 text-base">
+                            <i class="fa-brands fa-google-play text-xl"></i>
+                            <span>Probar App en Android</span>
+                        </button>
+                        <a href="#comunidad" class="w-full sm:w-auto px-8 py-4 bg-dnd-card hover:bg-dnd-border text-dnd-gold border border-dnd-borderLight font-heading font-semibold rounded-lg transition-all flex items-center justify-center gap-2 text-base">
+                            <i class="fa-solid fa-comment-dots"></i>
+                            <span>Dejar Retroalimentación</span>
+                        </a>
+                    </div>
+
+                    <!-- Stats banner -->
+                    <div class="pt-6 border-t border-dnd-border/60 grid grid-cols-3 gap-4 text-center lg:text-left">
+                        <div>
+                            <span class="block font-title text-2xl text-dnd-gold">v1.0</span>
+                            <span class="text-xs text-dnd-muted font-sans">Versión Actual</span>
+                        </div>
+                        <div>
+                            <span class="block font-title text-2xl text-dnd-gold">+100</span>
+                            <span class="text-xs text-dnd-muted font-sans">Testers Activos</span>
+                        </div>
+                        <div>
+                            <span class="block font-title text-2xl text-dnd-gold">100%</span>
+                            <span class="text-xs text-dnd-muted font-sans">En Español</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Graphic Right (Artwork with user logo) -->
+                <div class="lg:col-span-5 flex justify-center relative">
+                    <!-- Glow circle backdrop -->
+                    <div class="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-dnd-fire/20 blur-3xl pointer-events-none"></div>
+                    
+                    <!-- Card Frame styled as the App Cover -->
+                    <div class="relative w-full max-w-sm sm:max-w-md bg-dnd-card border-2 border-dnd-borderLight rounded-xl p-6 shadow-card-glow text-center">
+                        
+                        <!-- Top wax seal badge -->
+                        <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 bg-dnd-ember border-2 border-dnd-gold rounded-full flex items-center justify-center shadow-lg">
+                            <i class="fa-solid fa-dragon text-dnd-gold text-lg"></i>
+                        </div>
+
+                        <!-- Main Graphic Artwork Image -->
+                        <div class="my-4 p-2 bg-dnd-dark/80 rounded-lg border border-dnd-border flex flex-col items-center justify-center relative overflow-hidden group min-h-[220px]">
+                            <img src="icon-only_2.jpg" alt="DnD Campañas Logo" class="w-full h-auto max-h-72 object-contain rounded-md shadow-md hover:scale-105 transition-transform duration-300" onerror="this.style.display='none'; document.getElementById('logoFallbackGraphic').classList.remove('hidden');">
+                            
+                            <!-- Backup Parchment Banner shown when icon-only_2.jpg is not present in local folder -->
+                            <div id="logoFallbackGraphic" class="hidden py-8 px-4 text-center w-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-950/60 via-dnd-dark to-dnd-dark rounded-md border border-dnd-fire/40 shadow-inner">
+                                <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-dnd-dark border-2 border-dnd-gold flex items-center justify-center shadow-d20-glow">
+                                    <i class="fa-solid fa-dragon text-3xl text-dnd-fire animate-pulse"></i>
+                                </div>
+                                <h3 class="font-title text-2xl text-dnd-gold tracking-widest mb-1">DnD CAMPAÑAS</h3>
+                                <span class="font-medieval text-xs text-dnd-fire block mb-3">Portal del Aventurero</span>
+                                <div class="p-2 rounded bg-dnd-dark/90 border border-dnd-border text-[10px] text-dnd-muted">
+                                    <i class="fa-solid fa-circle-info text-dnd-gold mr-1"></i>
+                                    Para ver tu imagen oficial, guarda <code class="text-dnd-gold font-mono">icon-only_2.jpg</code> junto al archivo <code class="text-dnd-gold font-mono">index.html</code>.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Status Box -->
+                        <div class="p-3 bg-dnd-dark rounded-lg border border-dnd-border text-left flex items-center gap-3">
+                            <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+                            <div class="text-xs">
+                                <span class="font-bold text-dnd-parchment block">Servidores de Prueba Activos</span>
+                                <span class="text-dnd-muted">Nuevos cupos para testers abiertos hoy</span>
+                            </div>
+                        </div>
+
+                        <button onclick="openBetaModal()" class="w-full mt-4 py-2.5 bg-dnd-border hover:bg-dnd-borderLight text-dnd-gold font-heading text-sm rounded-lg border border-dnd-gold/30 transition-colors">
+                            <i class="fa-solid fa-key mr-2"></i> Solicitar Acceso a la Beta
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FEATURES SECTION -->
+        <section id="caracteristicas" class="py-16 bg-dnd-dark/70 border-y border-dnd-border relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="font-title text-2xl sm:text-4xl text-dnd-gold mb-3">
+                        Herramientas para la Mesa
+                    </h2>
+                    <p class="font-medieval text-dnd-fire text-lg">
+                        Diseñado por un jugador para apasionados del Rol
+                    </p>
+                    <div class="w-24 h-1 bg-gradient-to-r from-transparent via-dnd-fire to-transparent mx-auto mt-4"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Feature Card 1 -->
+                    <div class="parchment-box rounded-xl p-6 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-lg bg-dnd-dark border border-dnd-fire/40 flex items-center justify-center text-dnd-gold text-2xl mb-4">
+                            <i class="fa-solid fa-scroll"></i>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-dnd-gold mb-2">Fichas de Personaje</h3>
+                        <p class="text-dnd-parchmentDark text-sm leading-relaxed">
+                            Crea y edita tus hojas de personaje rápidamente. Lleva registro de tus atributos, salvaciones, equipamiento y hechizos con cálculo automático.
+                        </p>
+                    </div>
+
+                    <!-- Feature Card 2 -->
+                    <div class="parchment-box rounded-xl p-6 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-lg bg-dnd-dark border border-dnd-fire/40 flex items-center justify-center text-dnd-gold text-2xl mb-4">
+                            <i class="fa-solid fa-swords"></i>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-dnd-gold mb-2">Tracker de Iniciativa</h3>
+                        <p class="text-dnd-parchmentDark text-sm leading-relaxed">
+                            Di adiós al caos durante los combates. Agrega jugadores, monstruos y NPCs, aplica estados alterados y gestiona los Puntos de Golpe en vivo.
+                        </p>
+                    </div>
+
+                    <!-- Feature Card 3 -->
+                    <div class="parchment-box rounded-xl p-6 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-lg bg-dnd-dark border border-dnd-fire/40 flex items-center justify-center text-dnd-gold text-2xl mb-4">
+                            <i class="fa-solid fa-book-skull"></i>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-dnd-gold mb-2">Diario de Campañas</h3>
+                        <p class="text-dnd-parchmentDark text-sm leading-relaxed">
+                            Organiza tus sesiones, mapas, notas secretas del DM e historia previa de la aventura para que nunca olvides un detalle clave de la trama.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- LIBRARY / RESOURCE SHARING SECTION -->
+        <section id="biblioteca" class="py-16 bg-dnd-dark/90 border-b border-dnd-border relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-dnd-border gap-4">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-dnd-ember/20 border border-dnd-ember/40 text-dnd-gold font-medieval text-xs mb-2">
+                            <i class="fa-solid fa-map-location-dot"></i> Archivos y Materiales Compartidos
+                        </div>
+                        <h2 class="font-title text-2xl sm:text-4xl text-dnd-gold">
+                            Biblioteca de la Comunidad
+                        </h2>
+                        <p class="font-medieval text-dnd-fire text-base mt-1">
+                            Comparte e intercambia mapas de batalla, guías en PDF, imágenes de tokens y hojas de personajes
+                        </p>
+                    </div>
+
+                    <button onclick="openUploadResourceModal()" class="px-6 py-3 bg-gradient-to-r from-dnd-fire to-dnd-ember hover:from-dnd-ember hover:to-dnd-fire text-white font-heading font-bold text-sm rounded-lg shadow-d20-glow transition-all flex items-center justify-center gap-2 whitespace-nowrap">
+                        <i class="fa-solid fa-file-circle-plus text-base"></i>
+                        <span>Compartir Recurso</span>
+                    </button>
+                </div>
+
+                <!-- Search and Filter Bar -->
+                <div class="bg-dnd-card border border-dnd-border rounded-xl p-4 mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
+                    
+                    <!-- Search Input -->
+                    <div class="relative w-full md:w-80">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-dnd-muted text-xs"></i>
+                        <input type="text" id="resourceSearchInput" oninput="renderResources()" placeholder="Buscar mapas, PDFs, reglas..." 
+                               class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg pl-9 pr-4 py-2 text-xs text-dnd-parchment outline-none transition-colors">
+                    </div>
+
+                    <!-- Category Pills -->
+                    <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 font-heading text-xs">
+                        <button onclick="filterResources('All')" class="res-filter-btn px-3 py-1.5 rounded-lg bg-dnd-border text-dnd-gold font-semibold whitespace-nowrap">
+                            Todos
+                        </button>
+                        <button onclick="filterResources('Mapa')" class="res-filter-btn px-3 py-1.5 rounded-lg bg-dnd-dark text-dnd-muted hover:text-dnd-gold whitespace-nowrap">
+                            <i class="fa-solid fa-map mr-1"></i> Mapas
+                        </button>
+                        <button onclick="filterResources('PDF')" class="res-filter-btn px-3 py-1.5 rounded-lg bg-dnd-dark text-dnd-muted hover:text-dnd-gold whitespace-nowrap">
+                            <i class="fa-solid fa-file-pdf mr-1"></i> PDFs & Guías
+                        </button>
+                        <button onclick="filterResources('Imagen')" class="res-filter-btn px-3 py-1.5 rounded-lg bg-dnd-dark text-dnd-muted hover:text-dnd-gold whitespace-nowrap">
+                            <i class="fa-solid fa-image mr-1"></i> Tokens & Arte
+                        </button>
+                        <button onclick="filterResources('Hoja')" class="res-filter-btn px-3 py-1.5 rounded-lg bg-dnd-dark text-dnd-muted hover:text-dnd-gold whitespace-nowrap">
+                            <i class="fa-solid fa-user-shield mr-1"></i> Fichas / NPCs
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Resources Grid Container -->
+                <div id="resourcesContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- JS renders resources dynamically here -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- DEVLOG / CHANGELOG SECTION -->
+        <section id="devlog" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 border-b border-dnd-border pb-4">
+                <div>
+                    <h2 class="font-title text-2xl sm:text-4xl text-dnd-gold">
+                        Diario de Desarrollo
+                    </h2>
+                    <p class="font-medieval text-dnd-fire text-base mt-1">
+                        Sigue los cambios e innovaciones que implementamos continuamente
+                    </p>
+                </div>
+                <div class="mt-4 md:mt-0 font-sans text-xs text-dnd-muted">
+                    Versión actual: <span class="text-dnd-gold font-semibold">v1.0</span>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="relative border-l-2 border-dnd-border ml-4 md:ml-6 pl-6 md:pl-8 space-y-10">
+                
+                <!-- Log Item 1 -->
+                <div class="relative group">
+                    <!-- Timeline pin -->
+                    <div class="absolute -left-[31px] md:-left-[39px] top-1 w-5 h-5 rounded-full bg-dnd-fire border-4 border-dnd-dark shadow-md"></div>
+                    
+                    <div class="bg-dnd-card border border-dnd-border p-6 rounded-xl hover:border-dnd-borderLight transition-colors">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                            <span class="px-3 py-1 rounded bg-dnd-ember/20 border border-dnd-ember/50 text-dnd-gold font-heading text-xs font-bold">
+                                Versión v1.0
+                            </span>
+                            <span class="text-xs text-dnd-muted">Lanzamiento Actual</span>
+                        </div>
+                        <h3 class="font-heading text-lg font-bold text-dnd-gold mb-2">
+                            Mejoras en el Rastreador de Iniciativa y Corrección de Dados
+                        </h3>
+                        <ul class="list-disc list-inside text-sm text-dnd-parchmentDark space-y-1 font-sans">
+                            <li>Se optimizó el cálculo de tiradas de salvación automáticas.</li>
+                            <li>Añadida opción para ocultar vida exacta de los monstruos a los jugadores.</li>
+                            <li>Corrección de error que duplicaba elementos al guardar notas de sesión rápidamente.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- COMMUNITY FEEDBACK & QA SECTION -->
+        <section id="comunidad" class="py-16 bg-dnd-dark/90 border-t border-dnd-border relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="font-title text-2xl sm:text-4xl text-dnd-gold mb-2">
+                        Tablón de la Taberna
+                    </h2>
+                    <p class="font-medieval text-dnd-fire text-lg">
+                        Tus sugerencias e impresiones le dan forma al desarrollo de la aplicación
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    
+                    <!-- Feedback Form Left Column -->
+                    <div class="lg:col-span-5">
+                        <div class="bg-dnd-card border-2 border-dnd-border rounded-xl p-6 shadow-xl sticky top-28">
+                            
+                            <h3 class="font-heading text-xl font-bold text-dnd-gold mb-1 flex items-center gap-2">
+                                <i class="fa-solid fa-feather-pointed text-dnd-fire"></i>
+                                Escribir al Creador
+                            </h3>
+                            <p class="text-xs text-dnd-muted mb-6">
+                                Déjame tus comentarios, dudas o reportes de la beta de Android.
+                            </p>
+
+                            <form id="feedbackForm" onsubmit="handleFeedbackSubmit(event)" class="space-y-4">
+                                <div>
+                                    <label class="block font-heading text-xs text-dnd-gold mb-1">Nombre o Apodo de Aventurero *</label>
+                                    <input type="text" id="authorName" required placeholder="Ej. Elara de Oakhaven" 
+                                           class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none transition-colors">
+                                </div>
+
+                                <div>
+                                    <label class="block font-heading text-xs text-dnd-gold mb-1">Categoría *</label>
+                                    <select id="feedbackCategory" required 
+                                            class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none transition-colors">
+                                        <option value="Sugerencia">💡 Sugerencia de Función</option>
+                                        <option value="Pregunta">❓ Pregunta o Duda</option>
+                                        <option value="Bug">🐛 Reporte de Error (Bug)</option>
+                                        <option value="Felicitacion">⚔️ Felicitación / Comentario</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block font-heading text-xs text-dnd-gold mb-1">Mensaje o Retroalimentación *</label>
+                                    <textarea id="feedbackMessage" rows="4" required placeholder="¿Qué te parece la app? ¿Qué función te gustaría ver en la próxima actualización?" 
+                                              class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none transition-colors"></textarea>
+                                </div>
+
+                                <button type="submit" id="btnSubmitFeedback" 
+                                        class="w-full py-3 bg-gradient-to-r from-dnd-fire to-dnd-ember hover:from-dnd-ember hover:to-dnd-fire text-white font-heading font-bold rounded-lg shadow-md transition-all flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                    <span>Publicar en la Taberna</span>
+                                </button>
+                            </form>
+
+                        </div>
+                    </div>
+
+                    <!-- Community Messages Feed Right Column -->
+                    <div class="lg:col-span-7">
+                        
+                        <!-- Feed Filters -->
+                        <div class="flex items-center justify-between mb-6 pb-2 border-b border-dnd-border">
+                            <h3 class="font-heading text-lg font-bold text-dnd-gold">
+                                Mensajes de la Comunidad (<span id="commentsCount">0</span>)
+                            </h3>
+                            <div class="flex gap-2">
+                                <button onclick="filterComments('All')" class="filter-btn text-xs px-3 py-1 rounded bg-dnd-border text-dnd-gold font-semibold">
+                                    Todos
+                                </button>
+                                <button onclick="filterComments('Sugerencia')" class="filter-btn text-xs px-3 py-1 rounded bg-dnd-dark text-dnd-muted hover:text-dnd-gold">
+                                    Sugerencias
+                                </button>
+                                <button onclick="filterComments('Pregunta')" class="filter-btn text-xs px-3 py-1 rounded bg-dnd-dark text-dnd-muted hover:text-dnd-gold">
+                                    Dudas
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Posts Container -->
+                        <div id="postsContainer" class="space-y-4">
+                            <!-- JS Will Render Dynamic Comments Here -->
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL FOR RESOURCE SHARING (UPLOAD/LINK) -->
+    <div id="resourceModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-dnd-card border-2 border-dnd-borderLight rounded-xl max-w-lg w-full p-6 relative shadow-2xl animate-fade-in max-h-[90vh] overflow-y-auto">
+            
+            <button onclick="closeUploadResourceModal()" class="absolute top-4 right-4 text-dnd-muted hover:text-dnd-gold text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-dnd-dark rounded-full border border-dnd-fire flex items-center justify-center text-dnd-gold text-xl mx-auto mb-2">
+                    <i class="fa-solid fa-folder-plus"></i>
+                </div>
+                <h3 class="font-title text-2xl text-dnd-gold">Compartir Recurso con la Mesa</h3>
+                <p class="text-xs text-dnd-parchmentDark mt-1">
+                    Sube o enlaza mapas, compendios en PDF, tokens de personajes u hojas de utilidad.
+                </p>
+            </div>
+
+            <form onsubmit="handleResourceSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block font-heading text-xs text-dnd-gold mb-1">Título del Recurso *</label>
+                    <input type="text" id="resTitle" required placeholder="Ej. Mapa de Batalla: Taberna del Dragón Tuerto" 
+                           class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-heading text-xs text-dnd-gold mb-1">Tipo de Material *</label>
+                        <select id="resCategory" required 
+                                class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none">
+                            <option value="Mapa">🗺️ Mapa de Batalla / Grid</option>
+                            <option value="PDF">📄 Documento PDF / Guía</option>
+                            <option value="Imagen">🖼️ Imagen / Token de Arte</option>
+                            <option value="Hoja">🛡️ Ficha de Personaje / NPC</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block font-heading text-xs text-dnd-gold mb-1">Nombre del Creador *</label>
+                        <input type="text" id="resAuthor" required placeholder="Tu apodo o nombre" 
+                               class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-heading text-xs text-dnd-gold mb-1">Enlace de Descarga o Archivo (URL / Google Drive / Mega / Imgur) *</label>
+                    <input type="url" id="resUrl" required placeholder="https://drive.google.com/... o https://i.imgur.com/..." 
+                           class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none">
+                    <p class="text-[10px] text-dnd-muted mt-1">
+                        * Puedes colocar el enlace directo a tu imagen, PDF o carpeta compartida.
+                    </p>
+                </div>
+
+                <div>
+                    <label class="block font-heading text-xs text-dnd-gold mb-1">Descripción Breve o Instrucciones de Uso *</label>
+                    <textarea id="resDesc" rows="3" required placeholder="Ej. Grid de 25x25 casillas. Recomendado para encuentros urbanos de noche..." 
+                              class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-gradient-to-r from-dnd-fire to-dnd-ember text-white font-heading font-bold rounded-lg shadow-lg">
+                    Publicar Recurso en la Biblioteca
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- MODAL FOR ANDROID BETA TESTING -->
+    <div id="betaModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-dnd-card border-2 border-dnd-borderLight rounded-xl max-w-md w-full p-6 relative shadow-2xl animate-fade-in">
+            
+            <button onclick="closeBetaModal()" class="absolute top-4 right-4 text-dnd-muted hover:text-dnd-gold text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 bg-dnd-dark rounded-full border border-dnd-fire flex items-center justify-center text-green-400 text-3xl mx-auto mb-3">
+                    <i class="fa-brands fa-google-play"></i>
+                </div>
+                <h3 class="font-title text-2xl text-dnd-gold">Unirse al Testeo de Android</h3>
+                <p class="text-xs text-dnd-parchmentDark mt-1">
+                    Recibe acceso inmediato a las versiones beta en la Google Play Store.
+                </p>
+            </div>
+
+            <form onsubmit="handleBetaRegister(event)" class="space-y-4">
+                <div>
+                    <label class="block font-heading text-xs text-dnd-gold mb-1">Correo Gmail (Google Play) *</label>
+                    <input type="email" required placeholder="tu_correo@gmail.com" 
+                           class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none">
+                    <p class="text-[10px] text-dnd-muted mt-1">
+                        * Debe ser la misma cuenta asociada a tu teléfono Android.
+                    </p>
+                </div>
+
+                <div>
+                    <label class="block font-heading text-xs text-dnd-gold mb-1">Dispositivo Android (Opcional)</label>
+                    <input type="text" placeholder="Ej. Samsung S23, Xiaomi Redmi..." 
+                           class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none">
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-gradient-to-r from-dnd-fire to-dnd-ember text-white font-heading font-bold rounded-lg shadow-lg">
+                    Registrarme como Tester
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Custom Toast Container -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- FOOTER -->
+    <footer class="bg-dnd-dark border-t border-dnd-border py-10 relative z-10 text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="font-title text-dnd-gold text-lg mb-2">DnD Campañas</p>
+            <p class="text-xs text-dnd-muted max-w-xl mx-auto">
+                Una herramienta sencilla de un jugador apasionado para otros jugadores apasionados.
+            </p>
+            <div class="mt-6 text-xs text-dnd-parchmentDark">
+                &copy; 2026 DnD Campañas. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        
+        // Initial sample comments stored in browser memory & local storage
+        const defaultComments = [
+            {
+                id: 1,
+                author: "Balthazar El Hechicero",
+                category: "Sugerencia",
+                message: "¡Me encanta la app! Sería genial si en el rastreador de combate agregas una opción para tirar dados de daño directamente al tocar un ataque del monstruo.",
+                date: "Hace 1 día",
+                upvotes: 8,
+                status: "En Planificación"
+            },
+            {
+                id: 2,
+                author: "DM_Ignis",
+                category: "Pregunta",
+                message: "¿Tienen pensado sacar versión para iOS más adelante o por ahora solo estará enfocado en Android?",
+                date: "Hace 3 días",
+                upvotes: 5,
+                status: "Respondido"
+            },
+            {
+                id: 3,
+                author: "Thorin EscudoDeRoble",
+                category: "Bug",
+                message: "Encontré un pequeño detalle visual al girar la pantalla en horizontal mientras edito los Puntos de Golpe. ¡Todo lo demás marcha impecable!",
+                date: "Hace 4 días",
+                upvotes: 3,
+                status: "En Revisión"
+            }
+        ];
+
+        // Sample initial resources for community library
+        const defaultResources = [
+            {
+                id: 101,
+                title: "Mapa de Batalla: Taberna y Sótano Secreto (Grid 30x20)",
+                category: "Mapa",
+                author: "Cartógrafo_Aethelgard",
+                url: "https://placehold.co/800x600/160F0A/FFC857?text=Mapa+de+Batalla+Taberna",
+                desc: "Mapa táctico nocturno ideal para peleas de taberna o emboscadas. Incluye versión con y sin cuadrícula.",
+                downloads: 42,
+                likes: 19,
+                date: "Hace 2 días"
+            },
+            {
+                id: 102,
+                title: "Guía Rápida de Acciones y Condición de Combate (PDF 2 Págs)",
+                category: "PDF",
+                author: "DM_Kaelen",
+                url: "#",
+                desc: "Resumen imprimible de reglas de combate de 5ta edición: acciones en turno, salvaciones de muerte y estados alterados.",
+                downloads: 87,
+                likes: 35,
+                date: "Hace 5 días"
+            },
+            {
+                id: 103,
+                title: "Ficha de Personaje Modificada e Imprimible en Español",
+                category: "Hoja",
+                author: "Elara_Oakhaven",
+                url: "#",
+                desc: "Hoja de personaje en formato PDF interactivo con casillas ampliadas para inventario e historia del personaje.",
+                downloads: 64,
+                likes: 28,
+                date: "Hace 1 semana"
+            }
+        ];
+
+        let currentComments = [];
+        let currentResources = [];
+        let activeFilter = 'All';
+        let activeResourceFilter = 'All';
+
+        // Initialize App state
+        window.addEventListener('DOMContentLoaded', () => {
+            initCanvasEmbers();
+            loadComments();
+            loadResources();
+        });
+
+        // Load comments from LocalStorage or Default
+        function loadComments() {
+            const saved = localStorage.getItem('dnd_community_comments');
+            if (saved) {
+                try {
+                    currentComments = JSON.parse(saved);
+                } catch(e) {
+                    currentComments = [...defaultComments];
+                }
+            } else {
+                currentComments = [...defaultComments];
+            }
+            renderComments();
+        }
+
+        function saveComments() {
+            localStorage.setItem('dnd_community_comments', JSON.stringify(currentComments));
+        }
+
+        // Load Resources from LocalStorage or Default
+        function loadResources() {
+            const saved = localStorage.getItem('dnd_community_resources');
+            if (saved) {
+                try {
+                    currentResources = JSON.parse(saved);
+                } catch(e) {
+                    currentResources = [...defaultResources];
+                }
+            } else {
+                currentResources = [...defaultResources];
+            }
+            renderResources();
+        }
+
+        function saveResources() {
+            localStorage.setItem('dnd_community_resources', JSON.stringify(currentResources));
+        }
+
+        // Render Resources to Grid
+        function renderResources() {
+            const container = document.getElementById('resourcesContainer');
+            const searchQuery = (document.getElementById('resourceSearchInput')?.value || '').toLowerCase();
+
+            const filtered = currentResources.filter(res => {
+                const matchesCat = activeResourceFilter === 'All' || res.category === activeResourceFilter;
+                const matchesSearch = res.title.toLowerCase().includes(searchQuery) || 
+                                      res.desc.toLowerCase().includes(searchQuery) ||
+                                      res.author.toLowerCase().includes(searchQuery);
+                return matchesCat && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full p-8 text-center bg-dnd-card border border-dnd-border rounded-xl">
+                        <i class="fa-solid fa-folder-open text-3xl text-dnd-muted mb-2 block"></i>
+                        <p class="text-sm text-dnd-muted">No se encontraron recursos en esta categoría.</p>
+                        <button onclick="openUploadResourceModal()" class="mt-4 px-4 py-2 text-xs bg-dnd-border hover:bg-dnd-borderLight text-dnd-gold rounded-lg transition-colors">
+                            ¡Sé el primero en compartir uno!
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(r => {
+                let categoryIcon = 'fa-file';
+                let categoryColor = 'text-dnd-gold';
+                if (r.category === 'Mapa') { categoryIcon = 'fa-map'; categoryColor = 'text-amber-400'; }
+                if (r.category === 'PDF') { categoryIcon = 'fa-file-pdf'; categoryColor = 'text-red-400'; }
+                if (r.category === 'Imagen') { categoryIcon = 'fa-image'; categoryColor = 'text-purple-400'; }
+                if (r.category === 'Hoja') { categoryIcon = 'fa-user-shield'; categoryColor = 'text-blue-400'; }
+
+                return `
+                    <div class="parchment-box rounded-xl p-5 flex flex-col justify-between transition-all duration-300 group">
+                        <div>
+                            <!-- Header Info -->
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded bg-dnd-dark border border-dnd-border flex items-center gap-1.5 ${categoryColor}">
+                                    <i class="fa-solid ${categoryIcon}"></i>
+                                    <span>${r.category}</span>
+                                </span>
+                                <span class="text-[10px] text-dnd-muted">${r.date}</span>
+                            </div>
+
+                            <!-- Resource Title -->
+                            <h4 class="font-heading font-bold text-dnd-gold text-base mb-2 group-hover:text-dnd-fire transition-colors line-clamp-2">
+                                ${escapeHtml(r.title)}
+                            </h4>
+
+                            <!-- Description -->
+                            <p class="text-xs text-dnd-parchmentDark leading-relaxed mb-4 line-clamp-3">
+                                ${escapeHtml(r.desc)}
+                            </p>
+                        </div>
+
+                        <div>
+                            <!-- Author -->
+                            <div class="text-[11px] text-dnd-muted border-t border-dnd-border/60 pt-3 mb-3 flex items-center justify-between">
+                                <span>Por: <strong class="text-dnd-parchment">${escapeHtml(r.author)}</strong></span>
+                                <span class="flex items-center gap-1 text-[10px]"><i class="fa-solid fa-download"></i> ${r.downloads} descargas</span>
+                            </div>
+
+                            <!-- Actions -->
+                            <div class="flex items-center gap-2">
+                                <a href="${escapeHtml(r.url)}" target="_blank" onclick="incrementDownload(${r.id})" 
+                                   class="flex-1 py-2 px-3 bg-dnd-dark hover:bg-dnd-border border border-dnd-border text-dnd-gold font-heading text-xs rounded-lg transition-colors text-center flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-download"></i>
+                                    <span>Obtener</span>
+                                </a>
+                                <button onclick="likeResource(${r.id})" class="px-3 py-2 bg-dnd-dark hover:bg-dnd-border border border-dnd-border text-dnd-muted hover:text-dnd-fire rounded-lg text-xs transition-colors flex items-center gap-1">
+                                    <i class="fa-solid fa-heart"></i>
+                                    <span>${r.likes}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Like Resource
+        function likeResource(id) {
+            const res = currentResources.find(r => r.id === id);
+            if (res) {
+                res.likes++;
+                saveResources();
+                renderResources();
+                showToast('¡Añadido a tus favoritos!', 'info');
+            }
+        }
+
+        // Increment Download Count
+        function incrementDownload(id) {
+            const res = currentResources.find(r => r.id === id);
+            if (res) {
+                res.downloads++;
+                saveResources();
+                renderResources();
+            }
+        }
+
+        // Upload Resource Modal Handlers
+        function openUploadResourceModal() {
+            document.getElementById('resourceModal').classList.remove('hidden');
+        }
+
+        function closeUploadResourceModal() {
+            document.getElementById('resourceModal').classList.add('hidden');
+        }
+
+        function handleResourceSubmit(e) {
+            e.preventDefault();
+            const title = document.getElementById('resTitle').value.trim();
+            const category = document.getElementById('resCategory').value;
+            const author = document.getElementById('resAuthor').value.trim();
+            const url = document.getElementById('resUrl').value.trim();
+            const desc = document.getElementById('resDesc').value.trim();
+
+            if (!title || !author || !url || !desc) return;
+
+            const newResource = {
+                id: Date.now(),
+                title: title,
+                category: category,
+                author: author,
+                url: url,
+                desc: desc,
+                downloads: 1,
+                likes: 1,
+                date: 'Reciente'
+            };
+
+            currentResources.unshift(newResource);
+            saveResources();
+            renderResources();
+
+            closeUploadResourceModal();
+            showToast('¡Recurso añadido a la biblioteca comunitaria!', 'success');
+        }
+
+        // Filter Resources by Category
+        function filterResources(cat) {
+            activeResourceFilter = cat;
+            document.querySelectorAll('.res-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-dnd-border', 'text-dnd-gold');
+                btn.classList.add('bg-dnd-dark', 'text-dnd-muted');
+            });
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.remove('bg-dnd-dark', 'text-dnd-muted');
+                event.currentTarget.classList.add('bg-dnd-border', 'text-dnd-gold');
+            }
+            renderResources();
+        }
+
+        // Render Comments to DOM
+        function renderComments() {
+            const container = document.getElementById('postsContainer');
+            const filtered = activeFilter === 'All' 
+                ? currentComments 
+                : currentComments.filter(c => c.category === activeFilter);
+
+            document.getElementById('commentsCount').innerText = currentComments.length;
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="p-8 text-center bg-dnd-card border border-dnd-border rounded-xl">
+                        <i class="fa-solid fa-scroll text-3xl text-dnd-muted mb-2"></i>
+                        <p class="text-sm text-dnd-muted">No hay mensajes en esta categoría aún.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(c => {
+                let badgeColor = 'bg-dnd-dark text-dnd-gold border-dnd-border';
+                if (c.category === 'Bug') badgeColor = 'bg-red-950/60 text-red-300 border-red-800/50';
+                if (c.category === 'Sugerencia') badgeColor = 'bg-amber-950/60 text-amber-300 border-amber-800/50';
+                if (c.category === 'Pregunta') badgeColor = 'bg-blue-950/60 text-blue-300 border-blue-800/50';
+
+                return `
+                    <div class="bg-dnd-card border border-dnd-border p-5 rounded-xl hover:border-dnd-borderLight transition-all">
+                        <div class="flex items-start justify-between gap-2 mb-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-dnd-dark border border-dnd-fire/40 flex items-center justify-center font-title text-dnd-gold text-lg">
+                                    ${c.author.charAt(0).toUpperCase()}
+                                </div>
+                                <div>
+                                    <h4 class="font-heading font-bold text-dnd-gold text-sm">${escapeHtml(c.author)}</h4>
+                                    <span class="text-[10px] text-dnd-muted">${c.date}</span>
+                                </div>
+                            </div>
+                            
+                            <span class="text-[11px] font-semibold px-2.5 py-1 rounded border ${badgeColor}">
+                                ${c.category}
+                            </span>
+                        </div>
+
+                        <p class="text-sm text-dnd-parchmentDark font-sans leading-relaxed mb-4">
+                            ${escapeHtml(c.message)}
+                        </p>
+
+                        <div class="flex items-center justify-between pt-3 border-t border-dnd-border/60 text-xs">
+                            <button onclick="upvoteComment(${c.id})" class="flex items-center gap-1.5 text-dnd-muted hover:text-dnd-fire transition-colors">
+                                <i class="fa-solid fa-thumbs-up"></i>
+                                <span>Aprobar (${c.upvotes})</span>
+                            </button>
+
+                            ${c.status ? `
+                                <span class="text-[10px] font-medieval text-dnd-fire">
+                                    ✦ Estado: ${c.status}
+                                </span>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Handle Feedback Submission
+        function handleFeedbackSubmit(e) {
+            e.preventDefault();
+            const author = document.getElementById('authorName').value.trim();
+            const category = document.getElementById('feedbackCategory').value;
+            const message = document.getElementById('feedbackMessage').value.trim();
+
+            if (!author || !message) return;
+
+            const newComment = {
+                id: Date.now(),
+                author: author,
+                category: category,
+                message: message,
+                date: 'Reciente',
+                upvotes: 1,
+                status: 'En Revisión'
+            };
+
+            currentComments.unshift(newComment);
+            saveComments();
+            renderComments();
+
+            // Reset form
+            document.getElementById('feedbackForm').reset();
+            showToast('¡Tu mensaje ha sido grabado en el pergamino!', 'success');
+        }
+
+        // Upvote comment
+        function upvoteComment(id) {
+            const comment = currentComments.find(c => c.id === id);
+            if (comment) {
+                comment.upvotes++;
+                saveComments();
+                renderComments();
+                showToast('Aprobación registrada', 'info');
+            }
+        }
+
+        // Filter Comments
+        function filterComments(cat) {
+            activeFilter = cat;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-dnd-border', 'text-dnd-gold');
+                btn.classList.add('bg-dnd-dark', 'text-dnd-muted');
+            });
+            if (event && event.target) {
+                event.target.classList.remove('bg-dnd-dark', 'text-dnd-muted');
+                event.target.classList.add('bg-dnd-border', 'text-dnd-gold');
+            }
+            renderComments();
+        }
+
+        // Beta Modal Handlers
+        function openBetaModal() {
+            document.getElementById('betaModal').classList.remove('hidden');
+        }
+
+        function closeBetaModal() {
+            document.getElementById('betaModal').classList.add('hidden');
+        }
+
+        function handleBetaRegister(e) {
+            e.preventDefault();
+            closeBetaModal();
+            showToast('¡Excelente! Te añadiremos al grupo de pruebas de Google Play.', 'success');
+        }
+
+        // Toast Notification System
+        function showToast(msg, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            const bgColor = type === 'success' ? 'bg-dnd-card border-dnd-fire text-dnd-gold' : 'bg-dnd-card border-dnd-border text-dnd-parchment';
+            
+            toast.className = `p-4 rounded-xl border-2 shadow-2xl ${bgColor} flex items-center gap-3 transition-all transform translate-y-2 pointer-events-auto max-w-sm`;
+            toast.innerHTML = `
+                <i class="fa-solid fa-gem text-dnd-fire"></i>
+                <span class="text-xs font-semibold">${msg}</span>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', '-translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // Utility HTML Escape
+        function escapeHtml(str) {
+            return str.replace(/[&<>"']/g, function(m) {
+                return {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                }[m];
+            });
+        }
+
+        // Canvas Ember Particle Background Effect
+        function initCanvasEmbers() {
+            const canvas = document.getElementById('emberCanvas');
+            const ctx = canvas.getContext('2d');
+
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            const embers = [];
+            const count = 40;
+
+            for (let i = 0; i < count; i++) {
+                embers.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 2 + 0.5,
+                    speedY: Math.random() * 0.8 + 0.2,
+                    speedX: (Math.random() - 0.5) * 0.5,
+                    opacity: Math.random() * 0.7 + 0.3,
+                    color: Math.random() > 0.5 ? '#FF8C00' : '#FFC857'
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+
+                embers.forEach(e => {
+                    e.y -= e.speedY;
+                    e.x += e.speedX;
+
+                    if (e.y < 0) {
+                        e.y = height;
+                        e.x = Math.random() * width;
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(e.x, e.y, e.size, 0, Math.PI * 2);
+                    ctx.fillStyle = e.color;
+                    ctx.globalAlpha = e.opacity;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = e.color;
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        }
+    </script>
+</body>
+</html>
