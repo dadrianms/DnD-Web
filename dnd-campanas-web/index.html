@@ -79,15 +79,15 @@
 
         /* Custom scrollbar */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
         ::-webkit-scrollbar-track {
             background: #0D0805;
         }
         ::-webkit-scrollbar-thumb {
             background: #422B1D;
-            border-radius: 5px;
-            border: 2px solid #0D0805;
+            border-radius: 4px;
+            border: 1px solid #0D0805;
         }
         ::-webkit-scrollbar-thumb:hover {
             background: #FF8C00;
@@ -135,6 +135,9 @@
                 <a href="#comunidad" class="text-dnd-parchment hover:text-dnd-gold transition-colors flex items-center gap-2">
                     <i class="fa-solid fa-comments text-xs text-dnd-fire"></i> Taberna
                 </a>
+                <button onclick="openPrivacyModal()" class="text-dnd-parchment hover:text-dnd-gold transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-xs text-dnd-fire"></i> Privacidad
+                </button>
             </nav>
 
             <!-- CTA Beta Button Header -->
@@ -517,6 +520,224 @@
 
     </main>
 
+    <!-- MODAL FOR PRIVACY POLICY -->
+    <div id="privacyModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-dnd-card border-2 border-dnd-borderLight rounded-xl max-w-3xl w-full p-6 sm:p-8 relative shadow-2xl animate-fade-in max-h-[85vh] flex flex-col">
+            
+            <!-- Header -->
+            <div class="flex items-center justify-between pb-4 border-b border-dnd-border mb-4 flex-shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-dnd-dark rounded-lg border border-dnd-fire flex items-center justify-center text-dnd-gold text-lg">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-title text-xl sm:text-2xl text-dnd-gold">Política de Privacidad</h3>
+                        <p class="text-xs text-dnd-muted font-sans">Última actualización: 06 de Agosto de 2026</p>
+                    </div>
+                </div>
+                <button onclick="closePrivacyModal()" class="text-dnd-muted hover:text-dnd-gold text-xl p-2 transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Scrollable Content Body -->
+            <div class="overflow-y-auto pr-2 space-y-6 text-sm text-dnd-parchmentDark font-sans leading-relaxed text-left">
+                
+                <!-- Intro Notice -->
+                <div class="bg-dnd-dark/80 p-4 rounded-lg border border-dnd-border text-xs text-dnd-parchment">
+                    <p>Adrián Muñoz ("nosotros", "nuestro" o "el desarrollador") opera la aplicación móvil <strong>DnD Campañas</strong> (en adelante "el Servicio" o "la Aplicación"). Esta Política de Privacidad describe cómo recopilamos, usamos, almacenamos y protegemos su información personal cuando utiliza nuestro Servicio, y explica los derechos que usted tiene sobre sus datos. Al usar la Aplicación, usted acepta las prácticas descritas en este documento.</p>
+                </div>
+
+                <!-- Section 1 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
+                        <span class="text-dnd-fire font-medieval">1.</span> Introducción
+                    </h4>
+                    <p>
+                        Esta política se aplica a todos los aspectos del Servicio de DnD Campañas. Nuestro compromiso principal es garantizar la transparencia y seguridad de sus datos mientras disfruta organizando sus partidas y campañas.
+                    </p>
+                </div>
+
+                <!-- Section 2 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
+                        <span class="text-dnd-fire font-medieval">2.</span> Información que Recopilamos
+                    </h4>
+                    <p class="mb-2">Recopilamos los siguientes tipos de información para operar el Servicio:</p>
+                    <ul class="list-disc list-inside space-y-1.5 pl-2 text-xs sm:text-sm">
+                        <li><strong class="text-dnd-parchment">Datos de cuenta:</strong> Dirección de correo electrónico y nombre de perfil, obtenidos al iniciar sesión mediante Google o Discord a través de Supabase Auth.</li>
+                        <li><strong class="text-dnd-parchment">Datos de juego:</strong> Estadísticas de personajes, puntos de vida, inventario, hechizos, notas de campaña y configuraciones de la aplicación que usted crea y guarda voluntariamente.</li>
+                        <li><strong class="text-dnd-parchment">Datos técnicos:</strong> Identificadores de sesión y tokens de autenticación necesarios para mantener su sesión activa de forma segura.</li>
+                    </ul>
+                    <div class="mt-3 p-3 bg-red-950/30 border border-red-800/40 rounded-lg text-xs text-red-200 flex items-center gap-2">
+                        <i class="fa-solid fa-shield-xmark text-red-400 text-sm"></i>
+                        <span><strong>Nota de Privacidad:</strong> No recopilamos datos de ubicación, contactos del dispositivo, historial de llamadas, ni información financiera de ningún tipo.</span>
+                    </div>
+                </div>
+
+                <!-- Section 3 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
+                        <span class="text-dnd-fire font-medieval">3.</span> Uso de la Información
+                    </h4>
+                    <p class="mb-2">Utilizamos su información exclusivamente para los siguientes propósitos:</p>
+                    <ul class="list-disc list-inside space-y-1 pl-2 text-xs sm:text-sm">
+                        <li>Autenticar su identidad y permitirle acceder a su cuenta de forma segura.</li>
+                        <li>Sincronizar sus datos de juego entre dispositivos.</li>
+                        <li>Mantener el funcionamiento correcto del Servicio.</li>
+                        <li>Responder a solicitudes de soporte que usted inicie voluntariamente.</li>
+                    </ul>
+                    <p class="mt-2 text-dnd-gold font-semibold text-xs border-l-2 border-dnd-fire pl-3 py-1 bg-dnd-dark/50">
+                        ✦ No compartimos, vendemos ni cedemos su información personal a terceros con fines comerciales ni publicitarios.
+                    </p>
+                </div>
+
+                <!-- Section 4 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
+                        <span class="text-dnd-fire font-medieval">4.</span> Base Legal para el Tratamiento
+                    </h4>
+                    <p class="mb-2">Procesamos sus datos personales sobre las siguientes bases legales:</p>
+                    <ul class="list-disc list-inside space-y-1 pl-2 text-xs sm:text-sm">
+                        <li><strong class="text-dnd-parchment">Consentimiento:</strong> Al crear una cuenta o iniciar sesión, usted acepta voluntariamente esta política.</li>
+                        <li><strong class="text-dnd-parchment">Ejecución de contrato:</strong> Necesitamos procesar sus datos para prestarle el Servicio de sincronización y almacenamiento.</li>
+                        <li><strong class="text-dnd-parchment">Interés legítimo:</strong> Para garantizar la seguridad e integridad del Servicio.</li>
+                    </ul>
+                </div>
+
+                <!-- Section 5 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
+                        <span class="text-dnd-fire font-medieval">5.</span> Proveedores de Servicios (Terceros)
+                    </h4>
+                    <p class="mb-2">La Aplicación utiliza los siguientes servicios de terceros que pueden tener acceso a parte de su información para realizar funciones en nuestro nombre:</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                        <div class="p-3 bg-dnd-dark border border-dnd-border rounded-lg text-xs">
+                            <span class="font-bold text-dnd-gold block mb-1"><i class="fa-solid fa-database text-dnd-fire mr-1"></i> Supabase (supabase.com)</span>
+                            <p class="text-dnd-muted mb-2">Proporciona la base de datos en la nube y el servicio de autenticación.</p>
+                            <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer" class="text-dnd-fire hover:underline text-[11px] font-semibold">Ver política de Supabase &rarr;</a>
+                        </div>
+                        <div class="p-3 bg-dnd-dark border border-dnd-border rounded-lg text-xs">
+                            <span class="font-bold text-dnd-gold block mb-1"><i class="fa-brands fa-google text-dnd-fire mr-1"></i> Google Sign-In</span>
+                            <p class="text-dnd-muted mb-2">Permite iniciar sesión con su cuenta de Google.</p>
+                            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-dnd-fire hover:underline text-[11px] font-semibold">Ver política de Google &rarr;</a>
+                        </div>
+                        <div class="p-3 bg-dnd-dark border border-dnd-border rounded-lg text-xs">
+                            <span class="font-bold text-dnd-gold block mb-1"><i class="fa-brands fa-discord text-dnd-fire mr-1"></i> Discord OAuth</span>
+                            <p class="text-dnd-muted mb-2">Permite iniciar sesión con su cuenta de Discord.</p>
+                            <a href="https://discord.com/privacy" target="_blank" rel="noopener noreferrer" class="text-dnd-fire hover:underline text-[11px] font-semibold">Ver política de Discord &rarr;</a>
+                        </div>
+                        <div class="p-3 bg-dnd-dark border border-dnd-border rounded-lg text-xs">
+                            <span class="font-bold text-dnd-gold block mb-1"><i class="fa-brands fa-android text-dnd-fire mr-1"></i> Google Play Services</span>
+                            <p class="text-dnd-muted">Utilizados para la distribución de la app en Android y funciones del sistema.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 6 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
+                        <span class="text-dnd-fire font-medieval">6.</span> Permisos del Dispositivo
+                    </h4>
+                    <p class="mb-2">La Aplicación solicita los siguientes permisos en Android y los utiliza de la siguiente manera:</p>
+                    <ul class="list-disc list-inside space-y-1 pl-2 text-xs sm:text-sm">
+                        <li><code class="text-dnd-gold font-mono px-1 py-0.5 bg-dnd-dark rounded border border-dnd-border">INTERNET</code>: Necesario para conectarse a Supabase y sincronizar sus datos en la nube.</li>
+                        <li><code class="text-dnd-gold font-mono px-1 py-0.5 bg-dnd-dark rounded border border-dnd-border">ACCESS_NETWORK_STATE</code>: Permite detectar si hay conexión a internet para habilitar el modo offline.</li>
+                    </ul>
+                    <p class="mt-2 text-xs text-dnd-muted">No solicitamos permisos de cámara, micrófono, ubicación, contactos ni almacenamiento externo.</p>
+                </div>
+
+                <!-- Section 7 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
+                        <span class="text-dnd-fire font-medieval">7.</span> Retención de Datos
+                    </h4>
+                    <p>
+                        Conservamos sus datos personales mientras su cuenta esté activa o sea necesario para prestarle el Servicio. Si solicita la eliminación de su cuenta, eliminaremos sus datos personales en un plazo máximo de 30 días, salvo que la ley exija conservarlos por más tiempo. Los datos de juego (personajes, notas, etc.) se eliminan junto con la cuenta.
+                    </p>
+                </div>
+
+                <!-- Section 8 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
+                        <span class="text-dnd-fire font-medieval">8.</span> Seguridad
+                    </h4>
+                    <p class="mb-2">Implementamos medidas de seguridad técnicas y organizativas para proteger su información, incluyendo:</p>
+                    <ul class="list-disc list-inside space-y-1 pl-2 text-xs sm:text-sm">
+                        <li>Cifrado de datos en tránsito mediante HTTPS/TLS.</li>
+                        <li>Autenticación segura a través de tokens JWT gestionados por Supabase.</li>
+                        <li>Políticas de seguridad a nivel de fila (Row Level Security) en la base de datos para que cada usuario solo acceda a sus propios datos.</li>
+                    </ul>
+                    <p class="mt-2 text-xs text-dnd-muted">
+                        Sin embargo, ningún método de transmisión por Internet o almacenamiento electrónico es 100% seguro. Haremos todo lo posible para proteger su información, pero no podemos garantizar su seguridad absoluta.
+                    </p>
+                </div>
+
+                <!-- Section 9 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
+                        <span class="text-dnd-fire font-medieval">9.</span> Privacidad de los Menores
+                    </h4>
+                    <p>
+                        Esta Aplicación no está dirigida a personas menores de 13 años. No recopilamos a sabiendas información personal de niños menores de 13 años. Si descubrimos que hemos recopilado datos de un menor de 13 años sin el consentimiento verificado de sus padres o tutores, eliminaremos esa información de inmediato. Si usted es padre o tutor y cree que su hijo nos ha proporcionado datos personales, contáctenos al correo indicado en la sección de Contacto.
+                    </p>
+                </div>
+
+                <!-- Section 10 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
+                        <span class="text-dnd-fire font-medieval">10.</span> Sus Derechos sobre sus Datos
+                    </h4>
+                    <p class="mb-2">Usted tiene los siguientes derechos sobre su información personal:</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <div class="p-2.5 bg-dnd-dark border border-dnd-border rounded"><strong class="text-dnd-gold block mb-0.5">Acceso:</strong> Solicitar copia de sus datos personales.</div>
+                        <div class="p-2.5 bg-dnd-dark border border-dnd-border rounded"><strong class="text-dnd-gold block mb-0.5">Rectificación:</strong> Corregir información directamente en la app.</div>
+                        <div class="p-2.5 bg-dnd-dark border border-dnd-border rounded"><strong class="text-dnd-gold block mb-0.5">Eliminación:</strong> Solicitar borrado completo de su cuenta y datos.</div>
+                        <div class="p-2.5 bg-dnd-dark border border-dnd-border rounded"><strong class="text-dnd-gold block mb-0.5">Portabilidad:</strong> Solicitar sus datos en un formato legible.</div>
+                    </div>
+                    <p class="mt-2 text-xs text-dnd-muted">
+                        Para ejercer cualquiera de estos derechos, contáctenos por correo electrónico. Responderemos en un plazo máximo de 30 días.
+                    </p>
+                </div>
+
+                <!-- Section 11 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
+                        <span class="text-dnd-fire font-medieval">11.</span> Cambios en esta Política
+                    </h4>
+                    <p>
+                        Podemos actualizar esta Política de Privacidad periódicamente para reflejar cambios en el Servicio o en la legislación aplicable. Le notificaremos cualquier cambio significativo publicando la nueva versión en esta página y actualizando la fecha de "Última actualización" en la parte superior. Le recomendamos revisar esta política periódicamente. El uso continuado de la Aplicación tras los cambios constituye su aceptación de la nueva política.
+                    </p>
+                </div>
+
+                <!-- Section 12 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
+                        <span class="text-dnd-fire font-medieval">12.</span> Contacto
+                    </h4>
+                    <div class="p-4 bg-dnd-dark border border-dnd-fire/40 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                        <div>
+                            <p class="text-xs text-dnd-muted mb-1">Si tiene alguna pregunta, comentario o solicitud:</p>
+                            <a href="mailto:dndcampanas@gmail.com" class="text-dnd-gold font-bold font-mono text-sm hover:underline flex items-center gap-2">
+                                <i class="fa-solid fa-envelope text-dnd-fire"></i> dndcampanas@gmail.com
+                            </a>
+                        </div>
+                        <span class="text-[10px] text-dnd-muted">Respuesta en máx. 30 días hábiles</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer Modal Actions -->
+            <div class="pt-4 mt-4 border-t border-dnd-border flex justify-end flex-shrink-0">
+                <button onclick="closePrivacyModal()" class="px-6 py-2.5 bg-gradient-to-r from-dnd-fire to-dnd-ember hover:from-dnd-ember hover:to-dnd-fire text-white font-heading font-bold text-sm rounded-lg transition-all shadow-md">
+                    Entendido / Cerrar
+                </button>
+            </div>
+
+        </div>
+    </div>
+
     <!-- MODAL FOR RESOURCE SHARING (UPLOAD/LINK) -->
     <div id="resourceModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
         <div class="bg-dnd-card border-2 border-dnd-borderLight rounded-xl max-w-lg w-full p-6 relative shadow-2xl animate-fade-in max-h-[90vh] overflow-y-auto">
@@ -637,7 +858,17 @@
             <p class="text-xs text-dnd-muted max-w-xl mx-auto">
                 Una herramienta sencilla de un jugador apasionado para otros jugadores apasionados.
             </p>
-            <div class="mt-6 text-xs text-dnd-parchmentDark">
+            
+            <div class="mt-4 flex flex-wrap justify-center gap-6 text-xs text-dnd-parchmentDark">
+                <button onclick="openPrivacyModal()" class="hover:text-dnd-gold transition-colors underline decoration-dnd-fire/50 flex items-center gap-1.5">
+                    <i class="fa-solid fa-user-shield text-dnd-fire"></i> Política de Privacidad
+                </button>
+                <a href="mailto:dndcampanas@gmail.com" class="hover:text-dnd-gold transition-colors underline decoration-dnd-fire/50 flex items-center gap-1.5">
+                    <i class="fa-solid fa-envelope text-dnd-fire"></i> Soporte / Contacto
+                </a>
+            </div>
+
+            <div class="mt-6 text-xs text-dnd-muted">
                 &copy; 2026 DnD Campañas. Todos los derechos reservados.
             </div>
         </div>
@@ -1072,6 +1303,15 @@
 
         function closeBetaModal() {
             document.getElementById('betaModal').classList.add('hidden');
+        }
+
+        // Privacy Modal Handlers
+        function openPrivacyModal() {
+            document.getElementById('privacyModal').classList.remove('hidden');
+        }
+
+        function closePrivacyModal() {
+            document.getElementById('privacyModal').classList.add('hidden');
         }
 
         // Handle Android Beta Registration (Formspree Email Endpoint)
