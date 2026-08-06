@@ -451,13 +451,13 @@
                             <form id="feedbackForm" onsubmit="handleFeedbackSubmit(event)" class="space-y-4">
                                 <div>
                                     <label class="block font-heading text-xs text-dnd-gold mb-1">Nombre o Apodo de Aventurero *</label>
-                                    <input type="text" id="authorName" required placeholder="Ej. Elara de Oakhaven" 
+                                    <input type="text" id="authorName" name="author" required placeholder="Ej. Elara de Oakhaven" 
                                            class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none transition-colors">
                                 </div>
 
                                 <div>
                                     <label class="block font-heading text-xs text-dnd-gold mb-1">Categoría *</label>
-                                    <select id="feedbackCategory" required 
+                                    <select id="feedbackCategory" name="category" required 
                                             class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none transition-colors">
                                         <option value="Sugerencia">💡 Sugerencia de Función</option>
                                         <option value="Pregunta">❓ Pregunta o Duda</option>
@@ -468,7 +468,7 @@
 
                                 <div>
                                     <label class="block font-heading text-xs text-dnd-gold mb-1">Mensaje o Retroalimentación *</label>
-                                    <textarea id="feedbackMessage" rows="4" required placeholder="¿Qué te parece la app? ¿Qué función te gustaría ver en la próxima actualización?" 
+                                    <textarea id="feedbackMessage" name="message" rows="4" required placeholder="¿Qué te parece la app? ¿Qué función te gustaría ver en la próxima actualización?" 
                                               class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none transition-colors"></textarea>
                                 </div>
 
@@ -602,10 +602,10 @@
                 </p>
             </div>
 
-            <form onsubmit="handleBetaRegister(event)" class="space-y-4">
+            <form id="betaForm" onsubmit="handleBetaRegister(event)" class="space-y-4">
                 <div>
                     <label class="block font-heading text-xs text-dnd-gold mb-1">Correo Gmail (Google Play) *</label>
-                    <input type="email" required placeholder="tu_correo@gmail.com" 
+                    <input type="email" id="betaEmail" name="email" required placeholder="tu_correo@gmail.com" 
                            class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none">
                     <p class="text-[10px] text-dnd-muted mt-1">
                         * Debe ser la misma cuenta asociada a tu teléfono Android.
@@ -614,12 +614,13 @@
 
                 <div>
                     <label class="block font-heading text-xs text-dnd-gold mb-1">Dispositivo Android (Opcional)</label>
-                    <input type="text" placeholder="Ej. Samsung S23, Xiaomi Redmi..." 
+                    <input type="text" id="betaDevice" name="device" placeholder="Ej. Samsung S23, Xiaomi Redmi..." 
                            class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none">
                 </div>
 
-                <button type="submit" class="w-full py-3 bg-gradient-to-r from-dnd-fire to-dnd-ember text-white font-heading font-bold rounded-lg shadow-lg">
-                    Registrarme como Tester
+                <button type="submit" id="btnSubmitBeta" class="w-full py-3 bg-gradient-to-r from-dnd-fire to-dnd-ember text-white font-heading font-bold rounded-lg shadow-lg flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-google-play"></i>
+                    <span>Registrarme como Tester</span>
                 </button>
             </form>
 
@@ -644,7 +645,8 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xgawvyzz';
+
         // Initial sample comments stored in browser memory & local storage
         const defaultComments = [
             {
@@ -983,8 +985,8 @@
             }).join('');
         }
 
-        // Handle Feedback Submission
-        function handleFeedbackSubmit(e) {
+        // Handle Feedback Submission (Taberna + Formspree Email Notification)
+        async function handleFeedbackSubmit(e) {
             e.preventDefault();
             const author = document.getElementById('authorName').value.trim();
             const category = document.getElementById('feedbackCategory').value;
@@ -992,6 +994,12 @@
 
             if (!author || !message) return;
 
+            const btn = document.getElementById('btnSubmitFeedback');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>Enviando...</span>';
+
+            // Local update for community board
             const newComment = {
                 id: Date.now(),
                 author: author,
@@ -1006,9 +1014,30 @@
             saveComments();
             renderComments();
 
-            // Reset form
-            document.getElementById('feedbackForm').reset();
-            showToast('¡Tu mensaje ha sido grabado en el pergamino!', 'success');
+            // Send notification to Formspree
+            try {
+                await fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        _subject: `[DnD Taberna] Nuevo mensaje de ${author}`,
+                        Formulario: 'Tablón de la Taberna',
+                        Aventurero: author,
+                        Categoria: category,
+                        Mensaje: message
+                    })
+                });
+                showToast('¡Tu mensaje ha sido grabado en la Taberna y enviado al DM!', 'success');
+            } catch (err) {
+                showToast('Publicado en la Taberna localmente.', 'info');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                document.getElementById('feedbackForm').reset();
+            }
         }
 
         // Upvote comment
@@ -1045,10 +1074,42 @@
             document.getElementById('betaModal').classList.add('hidden');
         }
 
-        function handleBetaRegister(e) {
+        // Handle Android Beta Registration (Formspree Email Endpoint)
+        async function handleBetaRegister(e) {
             e.preventDefault();
-            closeBetaModal();
-            showToast('¡Excelente! Te añadiremos al grupo de pruebas de Google Play.', 'success');
+            const email = document.getElementById('betaEmail').value.trim();
+            const device = document.getElementById('betaDevice').value.trim();
+
+            if (!email) return;
+
+            const btn = document.getElementById('btnSubmitBeta');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>Registrando...</span>';
+
+            try {
+                await fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        _subject: `[DnD Beta Tester] Nuevo registro: ${email}`,
+                        Formulario: 'Inscripción Beta Android',
+                        Correo: email,
+                        Dispositivo: device || 'No especificado'
+                    })
+                });
+                showToast('¡Excelente! Te hemos registrado como Tester.', 'success');
+                e.target.reset();
+                closeBetaModal();
+            } catch (err) {
+                showToast('Ocurrió un inconveniente al enviar la solicitud. Intenta nuevamente.', 'info');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
         }
 
         // Toast Notification System
