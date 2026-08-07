@@ -13,6 +13,9 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Supabase JS Client CDN (Paso 3 de la guía) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -325,19 +328,19 @@
                 <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-dnd-border gap-4">
                     <div>
                         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-dnd-ember/20 border border-dnd-ember/40 text-dnd-gold font-medieval text-xs mb-2">
-                            <i class="fa-solid fa-map-location-dot"></i> Archivos y Materiales Compartidos
+                            <i class="fa-solid fa-cloud-arrow-up text-dnd-fire"></i> Archivos Alojados en la Nube
                         </div>
                         <h2 class="font-title text-2xl sm:text-4xl text-dnd-gold">
                             Biblioteca de la Comunidad
                         </h2>
                         <p class="font-medieval text-dnd-fire text-base mt-1">
-                            Comparte e intercambia mapas de batalla, guías en PDF, imágenes de tokens y hojas de personajes
+                            Sube y comparte mapas de batalla, guías en PDF, imágenes de tokens y hojas de personajes
                         </p>
                     </div>
 
                     <button onclick="openUploadResourceModal()" class="px-6 py-3 bg-gradient-to-r from-dnd-fire to-dnd-ember hover:from-dnd-ember hover:to-dnd-fire text-white font-heading font-bold text-sm rounded-lg shadow-d20-glow transition-all flex items-center justify-center gap-2 whitespace-nowrap">
                         <i class="fa-solid fa-file-circle-plus text-base"></i>
-                        <span>Compartir Recurso</span>
+                        <span>Subir Archivo Real</span>
                     </button>
                 </div>
 
@@ -411,12 +414,12 @@
                             <span class="text-xs text-dnd-muted">Lanzamiento Actual</span>
                         </div>
                         <h3 class="font-heading text-lg font-bold text-dnd-gold mb-2">
-                            Mejoras en el Rastreador de Iniciativa y Corrección de Dados
+                            Integración con Supabase Cloud Storage & Rastreador de Iniciativa
                         </h3>
                         <ul class="list-disc list-inside text-sm text-dnd-parchmentDark space-y-1 font-sans">
+                            <li>Integración directa con el SDK de Supabase Storage para alojar PDFs y mapas globales.</li>
                             <li>Se optimizó el cálculo de tiradas de salvación automáticas.</li>
                             <li>Añadida opción para ocultar vida exacta de los monstruos a los jugadores.</li>
-                            <li>Corrección de error que duplicaba elementos al guardar notas de sesión rápidamente.</li>
                         </ul>
                     </div>
                 </div>
@@ -748,11 +751,11 @@
 
             <div class="text-center mb-6">
                 <div class="w-12 h-12 bg-dnd-dark rounded-full border border-dnd-fire flex items-center justify-center text-dnd-gold text-xl mx-auto mb-2">
-                    <i class="fa-solid fa-folder-plus"></i>
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
                 </div>
-                <h3 class="font-title text-2xl text-dnd-gold">Compartir Recurso con la Mesa</h3>
+                <h3 class="font-title text-2xl text-dnd-gold">Subir Recurso a la Nube</h3>
                 <p class="text-xs text-dnd-parchmentDark mt-1">
-                    Sube o enlaza mapas, compendios en PDF, tokens de personajes u hojas de utilidad.
+                    Selecciona un archivo real para subirlo a Supabase Storage y compartirlo con todo el mundo.
                 </p>
             </div>
 
@@ -783,11 +786,11 @@
                 </div>
 
                 <div>
-                    <label class="block font-heading text-xs text-dnd-gold mb-1">Enlace de Descarga o Archivo (URL / Google Drive / Mega / Imgur) *</label>
-                    <input type="url" id="resUrl" required placeholder="https://drive.google.com/... o https://i.imgur.com/..." 
-                           class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none">
+                    <label class="block font-heading text-xs text-dnd-gold mb-1">Seleccionar Archivo (PDF, Imagen, TXT, ZIP) *</label>
+                    <input type="file" id="resFileInput" required accept=".pdf,image/*,.txt,.zip,.rar" 
+                           class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-3 py-2 text-xs text-dnd-parchment file:mr-4 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-dnd-fire file:text-white hover:file:bg-dnd-ember outline-none cursor-pointer">
                     <p class="text-[10px] text-dnd-muted mt-1">
-                        * Puedes colocar el enlace directo a tu imagen, PDF o carpeta compartida.
+                        * El archivo se almacenará de manera pública en tu servidor de Supabase Storage.
                     </p>
                 </div>
 
@@ -797,8 +800,9 @@
                               class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none"></textarea>
                 </div>
 
-                <button type="submit" class="w-full py-3 bg-gradient-to-r from-dnd-fire to-dnd-ember text-white font-heading font-bold rounded-lg shadow-lg">
-                    Publicar Recurso en la Biblioteca
+                <button type="submit" class="w-full py-3 bg-gradient-to-r from-dnd-fire to-dnd-ember text-white font-heading font-bold rounded-lg shadow-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Subir Archivo a Supabase Cloud</span>
                 </button>
             </form>
 
@@ -878,6 +882,22 @@
     <script>
         const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xgawvyzz';
 
+        // =========================================================
+        // CONFIGURACIÓN DE SUPABASE STORAGE (Pasos 3 y 4 de la Guía)
+        // Sustituye estos valores con los de tu proyecto de Supabase
+        // =========================================================
+        const SUPABASE_URL = 'https://tu-proyecto.supabase.co'; 
+        const SUPABASE_ANON_KEY = 'tu-clave-anon-publica-aqui';
+
+        let supabaseClient = null;
+        if (typeof supabase !== 'undefined' && SUPABASE_URL !== 'https://tu-proyecto.supabase.co') {
+            try {
+                supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            } catch (err) {
+                console.warn('Error al inicializar Supabase Client:', err);
+            }
+        }
+
         // Initial sample comments stored in browser memory & local storage
         const defaultComments = [
             {
@@ -909,42 +929,8 @@
             }
         ];
 
-        // Sample initial resources for community library
-        const defaultResources = [
-            {
-                id: 101,
-                title: "Mapa de Batalla: Taberna y Sótano Secreto (Grid 30x20)",
-                category: "Mapa",
-                author: "Cartógrafo_Aethelgard",
-                url: "https://placehold.co/800x600/160F0A/FFC857?text=Mapa+de+Batalla+Taberna",
-                desc: "Mapa táctico nocturno ideal para peleas de taberna o emboscadas. Incluye versión con y sin cuadrícula.",
-                downloads: 42,
-                likes: 19,
-                date: "Hace 2 días"
-            },
-            {
-                id: 102,
-                title: "Guía Rápida de Acciones y Condición de Combate (PDF 2 Págs)",
-                category: "PDF",
-                author: "DM_Kaelen",
-                url: "#",
-                desc: "Resumen imprimible de reglas de combate de 5ta edición: acciones en turno, salvaciones de muerte y estados alterados.",
-                downloads: 87,
-                likes: 35,
-                date: "Hace 5 días"
-            },
-            {
-                id: 103,
-                title: "Ficha de Personaje Modificada e Imprimible en Español",
-                category: "Hoja",
-                author: "Elara_Oakhaven",
-                url: "#",
-                desc: "Hoja de personaje en formato PDF interactivo con casillas ampliadas para inventario e historia del personaje.",
-                downloads: 64,
-                likes: 28,
-                date: "Hace 1 semana"
-            }
-        ];
+        // Library starts clean
+        const defaultResources = [];
 
         let currentComments = [];
         let currentResources = [];
@@ -1011,11 +997,12 @@
 
             if (filtered.length === 0) {
                 container.innerHTML = `
-                    <div class="col-span-full p-8 text-center bg-dnd-card border border-dnd-border rounded-xl">
-                        <i class="fa-solid fa-folder-open text-3xl text-dnd-muted mb-2 block"></i>
-                        <p class="text-sm text-dnd-muted">No se encontraron recursos en esta categoría.</p>
-                        <button onclick="openUploadResourceModal()" class="mt-4 px-4 py-2 text-xs bg-dnd-border hover:bg-dnd-borderLight text-dnd-gold rounded-lg transition-colors">
-                            ¡Sé el primero en compartir uno!
+                    <div class="col-span-full p-10 text-center bg-dnd-card border border-dnd-border rounded-xl">
+                        <i class="fa-solid fa-folder-open text-4xl text-dnd-muted mb-3 block"></i>
+                        <h4 class="font-heading font-bold text-dnd-gold text-lg mb-1">La Biblioteca está vacía</h4>
+                        <p class="text-xs text-dnd-muted max-w-md mx-auto mb-4">No hay mapas, guías o documentos subidos todavía. Sé el primer aventurero en compartir material útil con la mesa.</p>
+                        <button onclick="openUploadResourceModal()" class="px-5 py-2.5 text-xs bg-gradient-to-r from-dnd-fire to-dnd-ember text-white font-heading font-bold rounded-lg shadow-md transition-all">
+                            <i class="fa-solid fa-file-circle-plus mr-1"></i> Subir Primer Archivo
                         </button>
                     </div>
                 `;
@@ -1054,18 +1041,24 @@
                         </div>
 
                         <div>
-                            <!-- Author -->
-                            <div class="text-[11px] text-dnd-muted border-t border-dnd-border/60 pt-3 mb-3 flex items-center justify-between">
-                                <span>Por: <strong class="text-dnd-parchment">${escapeHtml(r.author)}</strong></span>
-                                <span class="flex items-center gap-1 text-[10px]"><i class="fa-solid fa-download"></i> ${r.downloads} descargas</span>
+                            <!-- File Metadata & Author -->
+                            <div class="text-[11px] text-dnd-muted border-t border-dnd-border/60 pt-3 mb-3 space-y-1">
+                                <div class="flex items-center justify-between">
+                                    <span>Por: <strong class="text-dnd-parchment">${escapeHtml(r.author)}</strong></span>
+                                    <span class="text-[10px] text-dnd-gold/80 font-mono">${r.fileSize || 'Archivo'}</span>
+                                </div>
+                                <div class="flex items-center justify-between text-[10px]">
+                                    <span class="truncate max-w-[160px]" title="${escapeHtml(r.fileName || 'archivo')}"><i class="fa-solid fa-paperclip mr-1"></i>${escapeHtml(r.fileName || 'archivo')}</span>
+                                    <span><i class="fa-solid fa-download"></i> ${r.downloads} descargas</span>
+                                </div>
                             </div>
 
                             <!-- Actions -->
                             <div class="flex items-center gap-2">
-                                <a href="${escapeHtml(r.url)}" target="_blank" onclick="incrementDownload(${r.id})" 
-                                   class="flex-1 py-2 px-3 bg-dnd-dark hover:bg-dnd-border border border-dnd-border text-dnd-gold font-heading text-xs rounded-lg transition-colors text-center flex items-center justify-center gap-2">
+                                <a href="${r.fileData}" target="_blank" download="${escapeHtml(r.fileName || 'recurso-dnd.bin')}" onclick="incrementDownload(${r.id})" 
+                                   class="flex-1 py-2 px-3 bg-gradient-to-r from-dnd-fire to-dnd-ember hover:from-dnd-ember hover:to-dnd-fire text-white font-heading text-xs font-bold rounded-lg transition-all text-center flex items-center justify-center gap-2 shadow-sm">
                                     <i class="fa-solid fa-download"></i>
-                                    <span>Obtener</span>
+                                    <span>Descargar Archivo</span>
                                 </a>
                                 <button onclick="likeResource(${r.id})" class="px-3 py-2 bg-dnd-dark hover:bg-dnd-border border border-dnd-border text-dnd-muted hover:text-dnd-fire rounded-lg text-xs transition-colors flex items-center gap-1">
                                     <i class="fa-solid fa-heart"></i>
@@ -1108,34 +1101,127 @@
             document.getElementById('resourceModal').classList.add('hidden');
         }
 
-        function handleResourceSubmit(e) {
+        // Handle Resource File Upload & Submit (Supabase Storage + Local Fallback)
+        async function handleResourceSubmit(e) {
             e.preventDefault();
             const title = document.getElementById('resTitle').value.trim();
             const category = document.getElementById('resCategory').value;
             const author = document.getElementById('resAuthor').value.trim();
-            const url = document.getElementById('resUrl').value.trim();
+            const fileInput = document.getElementById('resFileInput');
             const desc = document.getElementById('resDesc').value.trim();
 
-            if (!title || !author || !url || !desc) return;
+            if (!title || !author || !fileInput.files[0] || !desc) return;
 
-            const newResource = {
-                id: Date.now(),
-                title: title,
-                category: category,
-                author: author,
-                url: url,
-                desc: desc,
-                downloads: 1,
-                likes: 1,
-                date: 'Reciente'
-            };
+            const file = fileInput.files[0];
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
 
-            currentResources.unshift(newResource);
-            saveResources();
-            renderResources();
+            // Opción 1: Si el cliente de Supabase está activo y configurado
+            if (supabaseClient && SUPABASE_URL !== 'https://tu-proyecto.supabase.co') {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>Subiendo a Supabase Cloud...</span>';
 
-            closeUploadResourceModal();
-            showToast('¡Recurso añadido a la biblioteca comunitaria!', 'success');
+                try {
+                    // Generar un nombre único para evitar sobreescribir archivos con el mismo nombre
+                    const fileExt = file.name.split('.').pop();
+                    const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${fileExt}`;
+                    const filePath = `${category.toLowerCase()}/${fileName}`;
+
+                    // Subida física al bucket 'dnd-library' en Supabase Storage
+                    const { data: uploadData, error: uploadError } = await supabaseClient.storage
+                        .from('dnd-library')
+                        .upload(filePath, file);
+
+                    if (uploadError) throw uploadError;
+
+                    // Obtener la URL pública HTTPS para descargar
+                    const { data: urlData } = supabaseClient.storage
+                        .from('dnd-library')
+                        .getPublicUrl(filePath);
+
+                    const publicUrl = urlData.publicUrl;
+
+                    const newResource = {
+                        id: Date.now(),
+                        title: title,
+                        category: category,
+                        author: author,
+                        fileName: file.name,
+                        fileSize: formatBytes(file.size),
+                        fileData: publicUrl, // Enlace público directo a Supabase
+                        desc: desc,
+                        downloads: 0,
+                        likes: 0,
+                        date: 'Reciente'
+                    };
+
+                    currentResources.unshift(newResource);
+                    saveResources();
+                    renderResources();
+
+                    closeUploadResourceModal();
+                    e.target.reset();
+                    showToast('¡Archivo subido exitosamente a Supabase Storage!', 'success');
+
+                } catch (error) {
+                    console.error('Error al subir a Supabase:', error);
+                    showToast('Error en Supabase. Revisa las políticas o credenciales.', 'info');
+                } finally {
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                }
+            } 
+            // Opción 2: Fallback local Base64 si aún no has reemplazado tu SUPABASE_URL en el código
+            else {
+                if (file.size > 5 * 1024 * 1024) {
+                    showToast('Para la vista previa local sin Supabase, el archivo debe ser menor a 5MB.', 'info');
+                    return;
+                }
+
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>Procesando archivo...</span>';
+
+                const reader = new FileReader();
+                reader.onload = function(uploadEvent) {
+                    const base64Data = uploadEvent.target.result;
+
+                    const newResource = {
+                        id: Date.now(),
+                        title: title,
+                        category: category,
+                        author: author,
+                        fileName: file.name,
+                        fileSize: formatBytes(file.size),
+                        fileData: base64Data,
+                        desc: desc,
+                        downloads: 0,
+                        likes: 0,
+                        date: 'Reciente'
+                    };
+
+                    currentResources.unshift(newResource);
+                    saveResources();
+                    renderResources();
+
+                    closeUploadResourceModal();
+                    e.target.reset();
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                    showToast('Guardado localmente. Coloca tus claves de Supabase para subidas globales a la nube.', 'info');
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Helper to format bytes
+        function formatBytes(bytes, decimals = 2) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const dm = decimals < 0 ? 0 : decimals;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
         }
 
         // Filter Resources by Category
