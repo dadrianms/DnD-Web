@@ -13,7 +13,7 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Supabase JS Client CDN (Paso 3 de la guía) -->
+    <!-- Supabase JS Client CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <!-- Tailwind CSS -->
@@ -121,16 +121,13 @@
                 </div>
             </a>
 
-            <!-- Desktop Nav -->
+            <!-- Desktop Nav (Biblioteca link removed) -->
             <nav class="hidden md:flex items-center gap-6 lg:gap-8 font-heading text-sm font-semibold tracking-wide">
                 <a href="#inicio" class="text-dnd-parchment hover:text-dnd-gold transition-colors flex items-center gap-2">
                     <i class="fa-solid fa-house text-xs text-dnd-fire"></i> Inicio
                 </a>
                 <a href="#caracteristicas" class="text-dnd-parchment hover:text-dnd-gold transition-colors flex items-center gap-2">
                     <i class="fa-solid fa-scroll text-xs text-dnd-fire"></i> Funciones
-                </a>
-                <a href="#biblioteca" class="text-dnd-parchment hover:text-dnd-gold transition-colors flex items-center gap-2">
-                    <i class="fa-solid fa-book-open text-xs text-dnd-fire"></i> Biblioteca
                 </a>
                 <a href="#devlog" class="text-dnd-parchment hover:text-dnd-gold transition-colors flex items-center gap-2">
                     <i class="fa-solid fa-book-bookmark text-xs text-dnd-fire"></i> Actualizaciones
@@ -298,7 +295,7 @@
                     <!-- Feature Card 2 -->
                     <div class="parchment-box rounded-xl p-6 transition-all duration-300">
                         <div class="w-12 h-12 rounded-lg bg-dnd-dark border border-dnd-fire/40 flex items-center justify-center text-dnd-gold text-2xl mb-4">
-                            <i class="fa-solid fa-swords"></i>
+                            <i class="fa-solid fa-shield-halved"></i>
                         </div>
                         <h3 class="font-heading text-xl font-bold text-dnd-gold mb-2">Tracker de Iniciativa</h3>
                         <p class="text-dnd-parchmentDark text-sm leading-relaxed">
@@ -318,67 +315,6 @@
                     </div>
 
                 </div>
-            </div>
-        </section>
-
-        <!-- LIBRARY / RESOURCE SHARING SECTION -->
-        <section id="biblioteca" class="py-16 bg-dnd-dark/90 border-b border-dnd-border relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-dnd-border gap-4">
-                    <div>
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-dnd-ember/20 border border-dnd-ember/40 text-dnd-gold font-medieval text-xs mb-2">
-                            <i class="fa-solid fa-cloud-arrow-up text-dnd-fire"></i> Archivos Alojados en la Nube
-                        </div>
-                        <h2 class="font-title text-2xl sm:text-4xl text-dnd-gold">
-                            Biblioteca de la Comunidad
-                        </h2>
-                        <p class="font-medieval text-dnd-fire text-base mt-1">
-                            Sube y comparte mapas de batalla, guías en PDF, imágenes de tokens y hojas de personajes
-                        </p>
-                    </div>
-
-                    <button onclick="openUploadResourceModal()" class="px-6 py-3 bg-gradient-to-r from-dnd-fire to-dnd-ember hover:from-dnd-ember hover:to-dnd-fire text-white font-heading font-bold text-sm rounded-lg shadow-d20-glow transition-all flex items-center justify-center gap-2 whitespace-nowrap">
-                        <i class="fa-solid fa-file-circle-plus text-base"></i>
-                        <span>Subir Archivo Real</span>
-                    </button>
-                </div>
-
-                <!-- Search and Filter Bar -->
-                <div class="bg-dnd-card border border-dnd-border rounded-xl p-4 mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
-                    
-                    <!-- Search Input -->
-                    <div class="relative w-full md:w-80">
-                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-dnd-muted text-xs"></i>
-                        <input type="text" id="resourceSearchInput" oninput="renderResources()" placeholder="Buscar mapas, PDFs, reglas..." 
-                               class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg pl-9 pr-4 py-2 text-xs text-dnd-parchment outline-none transition-colors">
-                    </div>
-
-                    <!-- Category Pills -->
-                    <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 font-heading text-xs">
-                        <button onclick="filterResources('All')" class="res-filter-btn px-3 py-1.5 rounded-lg bg-dnd-border text-dnd-gold font-semibold whitespace-nowrap">
-                            Todos
-                        </button>
-                        <button onclick="filterResources('Mapa')" class="res-filter-btn px-3 py-1.5 rounded-lg bg-dnd-dark text-dnd-muted hover:text-dnd-gold whitespace-nowrap">
-                            <i class="fa-solid fa-map mr-1"></i> Mapas
-                        </button>
-                        <button onclick="filterResources('PDF')" class="res-filter-btn px-3 py-1.5 rounded-lg bg-dnd-dark text-dnd-muted hover:text-dnd-gold whitespace-nowrap">
-                            <i class="fa-solid fa-file-pdf mr-1"></i> PDFs & Guías
-                        </button>
-                        <button onclick="filterResources('Imagen')" class="res-filter-btn px-3 py-1.5 rounded-lg bg-dnd-dark text-dnd-muted hover:text-dnd-gold whitespace-nowrap">
-                            <i class="fa-solid fa-image mr-1"></i> Tokens & Arte
-                        </button>
-                        <button onclick="filterResources('Hoja')" class="res-filter-btn px-3 py-1.5 rounded-lg bg-dnd-dark text-dnd-muted hover:text-dnd-gold whitespace-nowrap">
-                            <i class="fa-solid fa-user-shield mr-1"></i> Fichas / NPCs
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Resources Grid Container -->
-                <div id="resourcesContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- JS renders resources dynamically here -->
-                </div>
-
             </div>
         </section>
 
@@ -414,11 +350,11 @@
                             <span class="text-xs text-dnd-muted">Lanzamiento Actual</span>
                         </div>
                         <h3 class="font-heading text-lg font-bold text-dnd-gold mb-2">
-                            Integración con Supabase Cloud Storage & Rastreador de Iniciativa
+                            Integración de Fichas y Rastreador de Iniciativa
                         </h3>
                         <ul class="list-disc list-inside text-sm text-dnd-parchmentDark space-y-1 font-sans">
-                            <li>Integración directa con el SDK de Supabase Storage para alojar PDFs y mapas globales.</li>
-                            <li>Se optimizó el cálculo de tiradas de salvación automáticas.</li>
+                            <li>Lanzamiento de la beta publica para dispositivos Android.</li>
+                            <li>Se optimizó el cálculo de tiradas de salvación automáticas y modificadores.</li>
                             <li>Añadida opción para ocultar vida exacta de los monstruos a los jugadores.</li>
                         </ul>
                     </div>
@@ -496,24 +432,23 @@
                             <h3 class="font-heading text-lg font-bold text-dnd-gold">
                                 Mensajes de la Comunidad (<span id="commentsCount">0</span>)
                             </h3>
-                            <div class="flex gap-2">
-                                <button onclick="filterComments('All')" class="filter-btn text-xs px-3 py-1 rounded bg-dnd-border text-dnd-gold font-semibold">
+                            <div class="flex items-center gap-2 text-xs font-heading">
+                                <button onclick="filterComments('All')" class="comment-filter-btn px-2.5 py-1 rounded bg-dnd-border text-dnd-gold font-semibold">
                                     Todos
                                 </button>
-                                <button onclick="filterComments('Sugerencia')" class="filter-btn text-xs px-3 py-1 rounded bg-dnd-dark text-dnd-muted hover:text-dnd-gold">
-                                    Sugerencias
+                                <button onclick="filterComments('Sugerencia')" class="comment-filter-btn px-2.5 py-1 rounded bg-dnd-dark text-dnd-muted hover:text-dnd-gold">
+                                    💡 Sugerencias
                                 </button>
-                                <button onclick="filterComments('Pregunta')" class="filter-btn text-xs px-3 py-1 rounded bg-dnd-dark text-dnd-muted hover:text-dnd-gold">
-                                    Dudas
+                                <button onclick="filterComments('Bug')" class="comment-filter-btn px-2.5 py-1 rounded bg-dnd-dark text-dnd-muted hover:text-dnd-gold">
+                                    🐛 Bugs
                                 </button>
                             </div>
                         </div>
 
-                        <!-- Posts Container -->
-                        <div id="postsContainer" class="space-y-4">
-                            <!-- JS Will Render Dynamic Comments Here -->
+                        <!-- Feed Container -->
+                        <div id="commentsFeed" class="space-y-4">
+                            <!-- Comments are injected dynamically via JavaScript -->
                         </div>
-
                     </div>
 
                 </div>
@@ -523,943 +458,310 @@
 
     </main>
 
-    <!-- MODAL FOR PRIVACY POLICY -->
-    <div id="privacyModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="bg-dnd-card border-2 border-dnd-borderLight rounded-xl max-w-3xl w-full p-6 sm:p-8 relative shadow-2xl animate-fade-in max-h-[85vh] flex flex-col">
-            
-            <!-- Header -->
-            <div class="flex items-center justify-between pb-4 border-b border-dnd-border mb-4 flex-shrink-0">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-dnd-dark rounded-lg border border-dnd-fire flex items-center justify-center text-dnd-gold text-lg">
-                        <i class="fa-solid fa-user-shield"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-title text-xl sm:text-2xl text-dnd-gold">Política de Privacidad</h3>
-                        <p class="text-xs text-dnd-muted font-sans">Última actualización: 06 de Agosto de 2026</p>
-                    </div>
-                </div>
-                <button onclick="closePrivacyModal()" class="text-dnd-muted hover:text-dnd-gold text-xl p-2 transition-colors">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <!-- Scrollable Content Body -->
-            <div class="overflow-y-auto pr-2 space-y-6 text-sm text-dnd-parchmentDark font-sans leading-relaxed text-left">
-                
-                <!-- Intro Notice -->
-                <div class="bg-dnd-dark/80 p-4 rounded-lg border border-dnd-border text-xs text-dnd-parchment">
-                    <p>Adrián Muñoz ("nosotros", "nuestro" o "el desarrollador") opera la aplicación móvil <strong>DnD Campañas</strong> (en adelante "el Servicio" o "la Aplicación"). Esta Política de Privacidad describe cómo recopilamos, usamos, almacenamos y protegemos su información personal cuando utiliza nuestro Servicio, y explica los derechos que usted tiene sobre sus datos. Al usar la Aplicación, usted acepta las prácticas descritas en este documento.</p>
-                </div>
-
-                <!-- Section 1 -->
-                <div>
-                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
-                        <span class="text-dnd-fire font-medieval">1.</span> Introducción
-                    </h4>
-                    <p>
-                        Esta política se aplica a todos los aspectos del Servicio de DnD Campañas. Nuestro compromiso principal es garantizar la transparencia y seguridad de sus datos mientras disfruta organizando sus partidas y campañas.
-                    </p>
-                </div>
-
-                <!-- Section 2 -->
-                <div>
-                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
-                        <span class="text-dnd-fire font-medieval">2.</span> Información que Recopilamos
-                    </h4>
-                    <p class="mb-2">Recopilamos los siguientes tipos de información para operar el Servicio:</p>
-                    <ul class="list-disc list-inside space-y-1.5 pl-2 text-xs sm:text-sm">
-                        <li><strong class="text-dnd-parchment">Datos de cuenta:</strong> Dirección de correo electrónico y nombre de perfil, obtenidos al iniciar sesión mediante Google o Discord a través de Supabase Auth.</li>
-                        <li><strong class="text-dnd-parchment">Datos de juego:</strong> Estadísticas de personajes, puntos de vida, inventario, hechizos, notas de campaña y configuraciones de la aplicación que usted crea y guarda voluntariamente.</li>
-                        <li><strong class="text-dnd-parchment">Datos técnicos:</strong> Identificadores de sesión y tokens de autenticación necesarios para mantener su sesión activa de forma segura.</li>
-                    </ul>
-                    <div class="mt-3 p-3 bg-red-950/30 border border-red-800/40 rounded-lg text-xs text-red-200 flex items-center gap-2">
-                        <i class="fa-solid fa-shield-xmark text-red-400 text-sm"></i>
-                        <span><strong>Nota de Privacidad:</strong> No recopilamos datos de ubicación, contactos del dispositivo, historial de llamadas, ni información financiera de ningún tipo.</span>
-                    </div>
-                </div>
-
-                <!-- Section 3 -->
-                <div>
-                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
-                        <span class="text-dnd-fire font-medieval">3.</span> Uso de la Información
-                    </h4>
-                    <p class="mb-2">Utilizamos su información exclusivamente para los siguientes propósitos:</p>
-                    <ul class="list-disc list-inside space-y-1 pl-2 text-xs sm:text-sm">
-                        <li>Autenticar su identidad y permitirle acceder a su cuenta de forma segura.</li>
-                        <li>Sincronizar sus datos de juego entre dispositivos.</li>
-                        <li>Mantener el funcionamiento correcto del Servicio.</li>
-                        <li>Responder a solicitudes de soporte que usted inicie voluntariamente.</li>
-                    </ul>
-                    <p class="mt-2 text-dnd-gold font-semibold text-xs border-l-2 border-dnd-fire pl-3 py-1 bg-dnd-dark/50">
-                        ✦ No compartimos, vendemos ni cedemos su información personal a terceros con fines comerciales ni publicitarios.
-                    </p>
-                </div>
-
-                <!-- Section 4 -->
-                <div>
-                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
-                        <span class="text-dnd-fire font-medieval">4.</span> Base Legal para el Tratamiento
-                    </h4>
-                    <p class="mb-2">Procesamos sus datos personales sobre las siguientes bases legales:</p>
-                    <ul class="list-disc list-inside space-y-1 pl-2 text-xs sm:text-sm">
-                        <li><strong class="text-dnd-parchment">Consentimiento:</strong> Al crear una cuenta o iniciar sesión, usted acepta voluntariamente esta política.</li>
-                        <li><strong class="text-dnd-parchment">Ejecución de contrato:</strong> Necesitamos procesar sus datos para prestarle el Servicio de sincronización y almacenamiento.</li>
-                        <li><strong class="text-dnd-parchment">Interés legítimo:</strong> Para garantizar la seguridad e integridad del Servicio.</li>
-                    </ul>
-                </div>
-
-                <!-- Section 5 -->
-                <div>
-                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
-                        <span class="text-dnd-fire font-medieval">5.</span> Proveedores de Servicios (Terceros)
-                    </h4>
-                    <p class="mb-2">La Aplicación utiliza los siguientes servicios de terceros que pueden tener acceso a parte de su información para realizar funciones en nuestro nombre:</p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
-                        <div class="p-3 bg-dnd-dark border border-dnd-border rounded-lg text-xs">
-                            <span class="font-bold text-dnd-gold block mb-1"><i class="fa-solid fa-database text-dnd-fire mr-1"></i> Supabase (supabase.com)</span>
-                            <p class="text-dnd-muted mb-2">Proporciona la base de datos en la nube y el servicio de autenticación.</p>
-                            <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer" class="text-dnd-fire hover:underline text-[11px] font-semibold">Ver política de Supabase &rarr;</a>
-                        </div>
-                        <div class="p-3 bg-dnd-dark border border-dnd-border rounded-lg text-xs">
-                            <span class="font-bold text-dnd-gold block mb-1"><i class="fa-brands fa-google text-dnd-fire mr-1"></i> Google Sign-In</span>
-                            <p class="text-dnd-muted mb-2">Permite iniciar sesión con su cuenta de Google.</p>
-                            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-dnd-fire hover:underline text-[11px] font-semibold">Ver política de Google &rarr;</a>
-                        </div>
-                        <div class="p-3 bg-dnd-dark border border-dnd-border rounded-lg text-xs">
-                            <span class="font-bold text-dnd-gold block mb-1"><i class="fa-brands fa-discord text-dnd-fire mr-1"></i> Discord OAuth</span>
-                            <p class="text-dnd-muted mb-2">Permite iniciar sesión con su cuenta de Discord.</p>
-                            <a href="https://discord.com/privacy" target="_blank" rel="noopener noreferrer" class="text-dnd-fire hover:underline text-[11px] font-semibold">Ver política de Discord &rarr;</a>
-                        </div>
-                        <div class="p-3 bg-dnd-dark border border-dnd-border rounded-lg text-xs">
-                            <span class="font-bold text-dnd-gold block mb-1"><i class="fa-brands fa-android text-dnd-fire mr-1"></i> Google Play Services</span>
-                            <p class="text-dnd-muted">Utilizados para la distribución de la app en Android y funciones del sistema.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Section 6 -->
-                <div>
-                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
-                        <span class="text-dnd-fire font-medieval">6.</span> Permisos del Dispositivo
-                    </h4>
-                    <p class="mb-2">La Aplicación solicita los siguientes permisos en Android y los utiliza de la siguiente manera:</p>
-                    <ul class="list-disc list-inside space-y-1 pl-2 text-xs sm:text-sm">
-                        <li><code class="text-dnd-gold font-mono px-1 py-0.5 bg-dnd-dark rounded border border-dnd-border">INTERNET</code>: Necesario para conectarse a Supabase y sincronizar sus datos en la nube.</li>
-                        <li><code class="text-dnd-gold font-mono px-1 py-0.5 bg-dnd-dark rounded border border-dnd-border">ACCESS_NETWORK_STATE</code>: Permite detectar si hay conexión a internet para habilitar el modo offline.</li>
-                    </ul>
-                    <p class="mt-2 text-xs text-dnd-muted">No solicitamos permisos de cámara, micrófono, ubicación, contactos ni almacenamiento externo.</p>
-                </div>
-
-                <!-- Section 7 -->
-                <div>
-                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
-                        <span class="text-dnd-fire font-medieval">7.</span> Retención de Datos
-                    </h4>
-                    <p>
-                        Conservamos sus datos personales mientras su cuenta esté activa o sea necesario para prestarle el Servicio. Si solicita la eliminación de su cuenta, eliminaremos sus datos personales en un plazo máximo de 30 días, salvo que la ley exija conservarlos por más tiempo. Los datos de juego (personajes, notas, etc.) se eliminan junto con la cuenta.
-                    </p>
-                </div>
-
-                <!-- Section 8 -->
-                <div>
-                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
-                        <span class="text-dnd-fire font-medieval">8.</span> Seguridad
-                    </h4>
-                    <p class="mb-2">Implementamos medidas de seguridad técnicas y organizativas para proteger su información, incluyendo:</p>
-                    <ul class="list-disc list-inside space-y-1 pl-2 text-xs sm:text-sm">
-                        <li>Cifrado de datos en tránsito mediante HTTPS/TLS.</li>
-                        <li>Autenticación segura a través de tokens JWT gestionados por Supabase.</li>
-                        <li>Políticas de seguridad a nivel de fila (Row Level Security) en la base de datos para que cada usuario solo acceda a sus propios datos.</li>
-                    </ul>
-                    <p class="mt-2 text-xs text-dnd-muted">
-                        Sin embargo, ningún método de transmisión por Internet o almacenamiento electrónico es 100% seguro. Haremos todo lo posible para proteger su información, pero no podemos garantizar su seguridad absoluta.
-                    </p>
-                </div>
-
-                <!-- Section 9 -->
-                <div>
-                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
-                        <span class="text-dnd-fire font-medieval">9.</span> Privacidad de los Menores
-                    </h4>
-                    <p>
-                        Esta Aplicación no está dirigida a personas menores de 13 años. No recopilamos a sabiendas información personal de niños menores de 13 años. Si descubrimos que hemos recopilado datos de un menor de 13 años sin el consentimiento verificado de sus padres o tutores, eliminaremos esa información de inmediato. Si usted es padre o tutor y cree que su hijo nos ha proporcionado datos personales, contáctenos al correo indicado en la sección de Contacto.
-                    </p>
-                </div>
-
-                <!-- Section 10 -->
-                <div>
-                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
-                        <span class="text-dnd-fire font-medieval">10.</span> Sus Derechos sobre sus Datos
-                    </h4>
-                    <p class="mb-2">Usted tiene los siguientes derechos sobre su información personal:</p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                        <div class="p-2.5 bg-dnd-dark border border-dnd-border rounded"><strong class="text-dnd-gold block mb-0.5">Acceso:</strong> Solicitar copia de sus datos personales.</div>
-                        <div class="p-2.5 bg-dnd-dark border border-dnd-border rounded"><strong class="text-dnd-gold block mb-0.5">Rectificación:</strong> Corregir información directamente en la app.</div>
-                        <div class="p-2.5 bg-dnd-dark border border-dnd-border rounded"><strong class="text-dnd-gold block mb-0.5">Eliminación:</strong> Solicitar borrado completo de su cuenta y datos.</div>
-                        <div class="p-2.5 bg-dnd-dark border border-dnd-border rounded"><strong class="text-dnd-gold block mb-0.5">Portabilidad:</strong> Solicitar sus datos en un formato legible.</div>
-                    </div>
-                    <p class="mt-2 text-xs text-dnd-muted">
-                        Para ejercer cualquiera de estos derechos, contáctenos por correo electrónico. Responderemos en un plazo máximo de 30 días.
-                    </p>
-                </div>
-
-                <!-- Section 11 -->
-                <div>
-                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
-                        <span class="text-dnd-fire font-medieval">11.</span> Cambios en esta Política
-                    </h4>
-                    <p>
-                        Podemos actualizar esta Política de Privacidad periódicamente para reflejar cambios en el Servicio o en la legislación aplicable. Le notificaremos cualquier cambio significativo publicando la nueva versión en esta página y actualizando la fecha de "Última actualización" en la parte superior. Le recomendamos revisar esta política periódicamente. El uso continuado de la Aplicación tras los cambios constituye su aceptación de la nueva política.
-                    </p>
-                </div>
-
-                <!-- Section 12 -->
-                <div>
-                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1.5 flex items-center gap-2">
-                        <span class="text-dnd-fire font-medieval">12.</span> Contacto
-                    </h4>
-                    <div class="p-4 bg-dnd-dark border border-dnd-fire/40 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                        <div>
-                            <p class="text-xs text-dnd-muted mb-1">Si tiene alguna pregunta, comentario o solicitud:</p>
-                            <a href="mailto:dndcampanas@gmail.com" class="text-dnd-gold font-bold font-mono text-sm hover:underline flex items-center gap-2">
-                                <i class="fa-solid fa-envelope text-dnd-fire"></i> dndcampanas@gmail.com
-                            </a>
-                        </div>
-                        <span class="text-[10px] text-dnd-muted">Respuesta en máx. 30 días hábiles</span>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Footer Modal Actions -->
-            <div class="pt-4 mt-4 border-t border-dnd-border flex justify-end flex-shrink-0">
-                <button onclick="closePrivacyModal()" class="px-6 py-2.5 bg-gradient-to-r from-dnd-fire to-dnd-ember hover:from-dnd-ember hover:to-dnd-fire text-white font-heading font-bold text-sm rounded-lg transition-all shadow-md">
-                    Entendido / Cerrar
-                </button>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- MODAL FOR RESOURCE SHARING (UPLOAD/LINK) -->
-    <div id="resourceModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="bg-dnd-card border-2 border-dnd-borderLight rounded-xl max-w-lg w-full p-6 relative shadow-2xl animate-fade-in max-h-[90vh] overflow-y-auto">
-            
-            <button onclick="closeUploadResourceModal()" class="absolute top-4 right-4 text-dnd-muted hover:text-dnd-gold text-lg">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <div class="text-center mb-6">
-                <div class="w-12 h-12 bg-dnd-dark rounded-full border border-dnd-fire flex items-center justify-center text-dnd-gold text-xl mx-auto mb-2">
-                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                </div>
-                <h3 class="font-title text-2xl text-dnd-gold">Subir Recurso a la Nube</h3>
-                <p class="text-xs text-dnd-parchmentDark mt-1">
-                    Selecciona un archivo real para subirlo a Supabase Storage y compartirlo con todo el mundo.
-                </p>
-            </div>
-
-            <form onsubmit="handleResourceSubmit(event)" class="space-y-4">
-                <div>
-                    <label class="block font-heading text-xs text-dnd-gold mb-1">Título del Recurso *</label>
-                    <input type="text" id="resTitle" required placeholder="Ej. Mapa de Batalla: Taberna del Dragón Tuerto" 
-                           class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none">
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block font-heading text-xs text-dnd-gold mb-1">Tipo de Material *</label>
-                        <select id="resCategory" required 
-                                class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none">
-                            <option value="Mapa">🗺️ Mapa de Batalla / Grid</option>
-                            <option value="PDF">📄 Documento PDF / Guía</option>
-                            <option value="Imagen">🖼️ Imagen / Token de Arte</option>
-                            <option value="Hoja">🛡️ Ficha de Personaje / NPC</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block font-heading text-xs text-dnd-gold mb-1">Nombre del Creador *</label>
-                        <input type="text" id="resAuthor" required placeholder="Tu apodo o nombre" 
-                               class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block font-heading text-xs text-dnd-gold mb-1">Seleccionar Archivo (PDF, Imagen, TXT, ZIP) *</label>
-                    <input type="file" id="resFileInput" required accept=".pdf,image/*,.txt,.zip,.rar" 
-                           class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-3 py-2 text-xs text-dnd-parchment file:mr-4 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-dnd-fire file:text-white hover:file:bg-dnd-ember outline-none cursor-pointer">
-                    <p class="text-[10px] text-dnd-muted mt-1">
-                        * El archivo se almacenará de manera pública en tu servidor de Supabase Storage.
-                    </p>
-                </div>
-
-                <div>
-                    <label class="block font-heading text-xs text-dnd-gold mb-1">Descripción Breve o Instrucciones de Uso *</label>
-                    <textarea id="resDesc" rows="3" required placeholder="Ej. Grid de 25x25 casillas. Recomendado para encuentros urbanos de noche..." 
-                              class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none"></textarea>
-                </div>
-
-                <button type="submit" class="w-full py-3 bg-gradient-to-r from-dnd-fire to-dnd-ember text-white font-heading font-bold rounded-lg shadow-lg flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                    <span>Subir Archivo a Supabase Cloud</span>
-                </button>
-            </form>
-
-        </div>
-    </div>
-
-    <!-- MODAL FOR ANDROID BETA TESTING -->
-    <div id="betaModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="bg-dnd-card border-2 border-dnd-borderLight rounded-xl max-w-md w-full p-6 relative shadow-2xl animate-fade-in">
-            
-            <button onclick="closeBetaModal()" class="absolute top-4 right-4 text-dnd-muted hover:text-dnd-gold text-lg">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <div class="text-center mb-6">
-                <div class="w-14 h-14 bg-dnd-dark rounded-full border border-dnd-fire flex items-center justify-center text-green-400 text-3xl mx-auto mb-3">
-                    <i class="fa-brands fa-google-play"></i>
-                </div>
-                <h3 class="font-title text-2xl text-dnd-gold">Unirse al Testeo de Android</h3>
-                <p class="text-xs text-dnd-parchmentDark mt-1">
-                    Recibe acceso inmediato a las versiones beta en la Google Play Store.
-                </p>
-            </div>
-
-            <form id="betaForm" onsubmit="handleBetaRegister(event)" class="space-y-4">
-                <div>
-                    <label class="block font-heading text-xs text-dnd-gold mb-1">Correo Gmail (Google Play) *</label>
-                    <input type="email" id="betaEmail" name="email" required placeholder="tu_correo@gmail.com" 
-                           class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none">
-                    <p class="text-[10px] text-dnd-muted mt-1">
-                        * Debe ser la misma cuenta asociada a tu teléfono Android.
-                    </p>
-                </div>
-
-                <div>
-                    <label class="block font-heading text-xs text-dnd-gold mb-1">Dispositivo Android (Opcional)</label>
-                    <input type="text" id="betaDevice" name="device" placeholder="Ej. Samsung S23, Xiaomi Redmi..." 
-                           class="w-full bg-dnd-dark border border-dnd-border focus:border-dnd-fire rounded-lg px-4 py-2.5 text-sm text-dnd-parchment outline-none">
-                </div>
-
-                <button type="submit" id="btnSubmitBeta" class="w-full py-3 bg-gradient-to-r from-dnd-fire to-dnd-ember text-white font-heading font-bold rounded-lg shadow-lg flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-google-play"></i>
-                    <span>Registrarme como Tester</span>
-                </button>
-            </form>
-
-        </div>
-    </div>
-
-    <!-- Custom Toast Container -->
-    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
-
     <!-- FOOTER -->
-    <footer class="bg-dnd-dark border-t border-dnd-border py-10 relative z-10 text-center">
-        <div class="max-w-7xl mx-auto px-4">
-            <p class="font-title text-dnd-gold text-lg mb-2">DnD Campañas</p>
-            <p class="text-xs text-dnd-muted max-w-xl mx-auto">
-                Una herramienta sencilla de un jugador apasionado para otros jugadores apasionados.
-            </p>
-            
-            <div class="mt-4 flex flex-wrap justify-center gap-6 text-xs text-dnd-parchmentDark">
-                <button onclick="openPrivacyModal()" class="hover:text-dnd-gold transition-colors underline decoration-dnd-fire/50 flex items-center gap-1.5">
-                    <i class="fa-solid fa-user-shield text-dnd-fire"></i> Política de Privacidad
-                </button>
-                <a href="mailto:dndcampanas@gmail.com" class="hover:text-dnd-gold transition-colors underline decoration-dnd-fire/50 flex items-center gap-1.5">
-                    <i class="fa-solid fa-envelope text-dnd-fire"></i> Soporte / Contacto
-                </a>
+    <footer class="bg-dnd-dark border-t border-dnd-border py-10 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded bg-gradient-to-br from-dnd-fire to-dnd-ember flex items-center justify-center text-dnd-gold font-medieval">
+                    <i class="fa-solid fa-dragon text-sm"></i>
+                </div>
+                <span class="font-title text-lg text-dnd-gold">DnD CAMPAÑAS</span>
             </div>
-
-            <div class="mt-6 text-xs text-dnd-muted">
-                &copy; 2026 DnD Campañas. Todos los derechos reservados.
+            <p class="text-xs text-dnd-muted">
+                D&D y Dungeons & Dragons son marcas registradas de Wizards of the Coast LLC. Esta aplicación independiente no está afiliada con WotC.
+            </p>
+            <div class="flex items-center gap-4 text-xs font-heading">
+                <button onclick="openPrivacyModal()" class="text-dnd-parchment hover:text-dnd-gold transition-colors">Política de Privacidad</button>
+                <button onclick="openBetaModal()" class="text-dnd-gold hover:underline">Acceso Beta</button>
             </div>
         </div>
     </footer>
 
+    <!-- BETA TESTER MODAL -->
+    <div id="betaModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden">
+        <div class="bg-dnd-card border-2 border-dnd-borderLight rounded-xl max-w-lg w-full p-6 shadow-2xl relative">
+            <button onclick="closeBetaModal()" class="absolute top-4 right-4 text-dnd-muted hover:text-dnd-gold text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-dnd-dark border-2 border-dnd-gold rounded-full flex items-center justify-center mx-auto mb-3 shadow-d20-glow">
+                    <i class="fa-brands fa-android text-3xl text-green-400"></i>
+                </div>
+                <h3 class="font-title text-2xl text-dnd-gold">Únete a la Beta en Android</h3>
+                <p class="font-medieval text-dnd-fire text-sm mt-1">Prueba la aplicación directamente en tu dispositivo</p>
+            </div>
+
+            <div class="space-y-4 text-sm text-dnd-parchmentDark font-sans bg-dnd-dark p-4 rounded-lg border border-dnd-border mb-6">
+                <div class="flex items-start gap-3">
+                    <span class="w-6 h-6 rounded-full bg-dnd-border text-dnd-gold flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">1</span>
+                    <p>Ingresa con tu cuenta de Google Play registrada para pruebas.</p>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="w-6 h-6 rounded-full bg-dnd-border text-dnd-gold flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">2</span>
+                    <p>Descarga el archivo APK de compilación directa o solicita tu invitación a la Google Play Console.</p>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="w-6 h-6 rounded-full bg-dnd-border text-dnd-gold flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">3</span>
+                    <p>Comparte cualquier bug o falla que encuentres en el <strong>Tablón de la Taberna</strong> de esta página.</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3">
+                <button onclick="closeBetaModal()" class="w-full py-3 bg-dnd-border hover:bg-dnd-borderLight text-dnd-parchment font-heading text-sm rounded-lg font-bold">
+                    Entendido
+                </button>
+                <a href="#comunidad" onclick="closeBetaModal()" class="w-full py-3 bg-gradient-to-r from-dnd-fire to-dnd-ember text-white font-heading text-sm rounded-lg font-bold text-center block">
+                    Ir a la Taberna
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRIVACY POLICY MODAL -->
+    <div id="privacyModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden">
+        <div class="bg-dnd-card border-2 border-dnd-borderLight rounded-xl max-w-xl w-full p-6 shadow-2xl relative max-h-[85vh] overflow-y-auto">
+            <button onclick="closePrivacyModal()" class="absolute top-4 right-4 text-dnd-muted hover:text-dnd-gold text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <h3 class="font-title text-2xl text-dnd-gold mb-2 flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-dnd-fire"></i>
+                Política de Privacidad
+            </h3>
+            <p class="text-xs text-dnd-muted mb-4">Última actualización: Agosto 2026</p>
+
+            <div class="space-y-4 text-xs text-dnd-parchmentDark leading-relaxed">
+                <p>
+                    En <strong>DnD Campañas</strong> valoramos la privacidad de nuestra comunidad de aventureros. Esta política explica cómo manejamos los datos transmitidos en nuestra plataforma.
+                </p>
+                <h4 class="font-heading font-bold text-dnd-gold text-sm">1. Información Recopilada</h4>
+                <p>
+                    Recopilamos únicamente los datos proporcionados voluntariamente en el formulario de la Taberna (apodo de usuario, categoría y mensaje de retroalimentación).
+                </p>
+                <h4 class="font-heading font-bold text-dnd-gold text-sm">2. Uso de la Información</h4>
+                <p>
+                    La información se utiliza únicamente para el desarrollo continuo de la aplicación, corrección de errores reportados por los testers y la comunicación de mejoras.
+                </p>
+                <h4 class="font-heading font-bold text-dnd-gold text-sm">3. Almacenamiento Seguro</h4>
+                <p>
+                    Los mensajes transmitidos son almacenados de forma segura mediante servicios de infraestructura cloud. No vendemos ni compartimos datos con terceros.
+                </p>
+            </div>
+
+            <button onclick="closePrivacyModal()" class="w-full mt-6 py-2.5 bg-dnd-border hover:bg-dnd-borderLight text-dnd-gold font-heading text-xs rounded-lg font-bold">
+                Cerrar Ventana
+            </button>
+        </div>
+    </div>
+
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xgawvyzz';
+        /* === MAGICAL EMBER PARTICLE CANVAS === */
+        const canvas = document.getElementById('emberCanvas');
+        const ctx = canvas.getContext('2d');
 
-        // =========================================================
-        // CONFIGURACIÓN DE SUPABASE STORAGE (Pasos 3 y 4 de la Guía)
-        // Sustituye estos valores con los de tu proyecto de Supabase
-        // =========================================================
-        const SUPABASE_URL = 'https://tu-proyecto.supabase.co'; 
-        const SUPABASE_ANON_KEY = 'tu-clave-anon-publica-aqui';
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-        let supabaseClient = null;
-        if (typeof supabase !== 'undefined' && SUPABASE_URL !== 'https://tu-proyecto.supabase.co') {
-            try {
-                supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-            } catch (err) {
-                console.warn('Error al inicializar Supabase Client:', err);
-            }
+        const embers = [];
+        const emberCount = 35;
+
+        for (let i = 0; i < emberCount; i++) {
+            embers.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2.5 + 1,
+                speedY: Math.random() * 0.7 + 0.3,
+                speedX: (Math.random() - 0.5) * 0.4,
+                opacity: Math.random() * 0.7 + 0.3,
+                color: Math.random() > 0.4 ? '#FF5722' : '#FFC857'
+            });
         }
 
-        // Initial sample comments stored in browser memory & local storage
-        const defaultComments = [
+        function animateEmbers() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            embers.forEach(p => {
+                p.y -= p.speedY;
+                p.x += p.speedX;
+                if (p.y < 0) {
+                    p.y = canvas.height + 10;
+                    p.x = Math.random() * canvas.width;
+                }
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = p.opacity;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = p.color;
+                ctx.fill();
+            });
+            requestAnimationFrame(animateEmbers);
+        }
+        animateEmbers();
+
+        /* === MODAL CONTROLS === */
+        function openBetaModal() {
+            document.getElementById('betaModal').classList.remove('hidden');
+        }
+        function closeBetaModal() {
+            document.getElementById('betaModal').classList.add('hidden');
+        }
+        function openPrivacyModal() {
+            document.getElementById('privacyModal').classList.remove('hidden');
+        }
+        function closePrivacyModal() {
+            document.getElementById('privacyModal').classList.add('hidden');
+        }
+
+        /* === COMMUNITY TABERNA FEEDBACK LOGIC === */
+        let commentsList = [
             {
                 id: 1,
-                author: "Balthazar El Hechicero",
+                author: "Brimm Martillo de Hierro",
                 category: "Sugerencia",
-                message: "¡Me encanta la app! Sería genial si en el rastreador de combate agregas una opción para tirar dados de daño directamente al tocar un ataque del monstruo.",
-                date: "Hace 1 día",
-                upvotes: 8,
-                status: "En Planificación"
+                message: "¡Excelente iniciativa! Estaría genial agregar un generador rápido de nombres para NPCs en la pestaña del DM.",
+                date: "Hace 2 horas",
+                likes: 5
             },
             {
                 id: 2,
-                author: "DM_Ignis",
-                category: "Pregunta",
-                message: "¿Tienen pensado sacar versión para iOS más adelante o por ahora solo estará enfocado en Android?",
-                date: "Hace 3 días",
-                upvotes: 5,
-                status: "Respondido"
+                author: "Elara Vientoestelar",
+                category: "Felicitacion",
+                message: "La ficha interactiva va súper fluida en mi teléfono Android. ¡Felicidades por la versión 1.0!",
+                date: "Hace 5 horas",
+                likes: 8
             },
             {
                 id: 3,
-                author: "Thorin EscudoDeRoble",
+                author: "Darian el Bardo",
                 category: "Bug",
-                message: "Encontré un pequeño detalle visual al girar la pantalla en horizontal mientras edito los Puntos de Golpe. ¡Todo lo demás marcha impecable!",
-                date: "Hace 4 días",
-                upvotes: 3,
-                status: "En Revisión"
+                message: "En pantallas pequeñas de 5 pulgadas, el botón de tirada de salvación se corta ligeramente. Todo lo demás perfecto.",
+                date: "Ayer",
+                likes: 2
             }
         ];
 
-        // Library starts clean
-        const defaultResources = [];
-
-        let currentComments = [];
-        let currentResources = [];
         let activeFilter = 'All';
-        let activeResourceFilter = 'All';
 
-        // Initialize App state
-        window.addEventListener('DOMContentLoaded', () => {
-            initCanvasEmbers();
-            loadComments();
-            loadResources();
-        });
+        function renderComments() {
+            const container = document.getElementById('commentsFeed');
+            const countEl = document.getElementById('commentsCount');
+            if (!container) return;
 
-        // Load comments from LocalStorage or Default
-        function loadComments() {
-            const saved = localStorage.getItem('dnd_community_comments');
-            if (saved) {
-                try {
-                    currentComments = JSON.parse(saved);
-                } catch(e) {
-                    currentComments = [...defaultComments];
-                }
-            } else {
-                currentComments = [...defaultComments];
-            }
-            renderComments();
-        }
-
-        function saveComments() {
-            localStorage.setItem('dnd_community_comments', JSON.stringify(currentComments));
-        }
-
-        // Load Resources from LocalStorage or Default
-        function loadResources() {
-            const saved = localStorage.getItem('dnd_community_resources');
-            if (saved) {
-                try {
-                    currentResources = JSON.parse(saved);
-                } catch(e) {
-                    currentResources = [...defaultResources];
-                }
-            } else {
-                currentResources = [...defaultResources];
-            }
-            renderResources();
-        }
-
-        function saveResources() {
-            localStorage.setItem('dnd_community_resources', JSON.stringify(currentResources));
-        }
-
-        // Render Resources to Grid
-        function renderResources() {
-            const container = document.getElementById('resourcesContainer');
-            const searchQuery = (document.getElementById('resourceSearchInput')?.value || '').toLowerCase();
-
-            const filtered = currentResources.filter(res => {
-                const matchesCat = activeResourceFilter === 'All' || res.category === activeResourceFilter;
-                const matchesSearch = res.title.toLowerCase().includes(searchQuery) || 
-                                      res.desc.toLowerCase().includes(searchQuery) ||
-                                      res.author.toLowerCase().includes(searchQuery);
-                return matchesCat && matchesSearch;
-            });
+            const filtered = commentsList.filter(c => activeFilter === 'All' || c.category === activeFilter);
+            countEl.textContent = commentsList.length;
 
             if (filtered.length === 0) {
                 container.innerHTML = `
-                    <div class="col-span-full p-10 text-center bg-dnd-card border border-dnd-border rounded-xl">
-                        <i class="fa-solid fa-folder-open text-4xl text-dnd-muted mb-3 block"></i>
-                        <h4 class="font-heading font-bold text-dnd-gold text-lg mb-1">La Biblioteca está vacía</h4>
-                        <p class="text-xs text-dnd-muted max-w-md mx-auto mb-4">No hay mapas, guías o documentos subidos todavía. Sé el primer aventurero en compartir material útil con la mesa.</p>
-                        <button onclick="openUploadResourceModal()" class="px-5 py-2.5 text-xs bg-gradient-to-r from-dnd-fire to-dnd-ember text-white font-heading font-bold rounded-lg shadow-md transition-all">
-                            <i class="fa-solid fa-file-circle-plus mr-1"></i> Subir Primer Archivo
-                        </button>
+                    <div class="text-center py-10 parchment-box rounded-xl p-6">
+                        <i class="fa-solid fa-scroll text-dnd-muted text-3xl mb-2"></i>
+                        <p class="text-dnd-parchmentDark text-sm">No hay mensajes en esta categoría aún.</p>
                     </div>
                 `;
                 return;
             }
 
-            container.innerHTML = filtered.map(r => {
-                let categoryIcon = 'fa-file';
-                let categoryColor = 'text-dnd-gold';
-                if (r.category === 'Mapa') { categoryIcon = 'fa-map'; categoryColor = 'text-amber-400'; }
-                if (r.category === 'PDF') { categoryIcon = 'fa-file-pdf'; categoryColor = 'text-red-400'; }
-                if (r.category === 'Imagen') { categoryIcon = 'fa-image'; categoryColor = 'text-purple-400'; }
-                if (r.category === 'Hoja') { categoryIcon = 'fa-user-shield'; categoryColor = 'text-blue-400'; }
+            container.innerHTML = filtered.map(item => {
+                let badgeColor = 'bg-blue-500/20 text-blue-300 border-blue-500/40';
+                let categoryIcon = '💡';
+                if (item.category === 'Bug') {
+                    badgeColor = 'bg-red-500/20 text-red-300 border-red-500/40';
+                    categoryIcon = '🐛';
+                } else if (item.category === 'Felicitacion') {
+                    badgeColor = 'bg-amber-500/20 text-amber-300 border-amber-500/40';
+                    categoryIcon = '⚔️';
+                } else if (item.category === 'Pregunta') {
+                    badgeColor = 'bg-purple-500/20 text-purple-300 border-purple-500/40';
+                    categoryIcon = '❓';
+                }
 
                 return `
-                    <div class="parchment-box rounded-xl p-5 flex flex-col justify-between transition-all duration-300 group">
-                        <div>
-                            <!-- Header Info -->
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="text-xs font-semibold px-2.5 py-1 rounded bg-dnd-dark border border-dnd-border flex items-center gap-1.5 ${categoryColor}">
-                                    <i class="fa-solid ${categoryIcon}"></i>
-                                    <span>${r.category}</span>
-                                </span>
-                                <span class="text-[10px] text-dnd-muted">${r.date}</span>
-                            </div>
-
-                            <!-- Resource Title -->
-                            <h4 class="font-heading font-bold text-dnd-gold text-base mb-2 group-hover:text-dnd-fire transition-colors line-clamp-2">
-                                ${escapeHtml(r.title)}
-                            </h4>
-
-                            <!-- Description -->
-                            <p class="text-xs text-dnd-parchmentDark leading-relaxed mb-4 line-clamp-3">
-                                ${escapeHtml(r.desc)}
-                            </p>
-                        </div>
-
-                        <div>
-                            <!-- File Metadata & Author -->
-                            <div class="text-[11px] text-dnd-muted border-t border-dnd-border/60 pt-3 mb-3 space-y-1">
-                                <div class="flex items-center justify-between">
-                                    <span>Por: <strong class="text-dnd-parchment">${escapeHtml(r.author)}</strong></span>
-                                    <span class="text-[10px] text-dnd-gold/80 font-mono">${r.fileSize || 'Archivo'}</span>
-                                </div>
-                                <div class="flex items-center justify-between text-[10px]">
-                                    <span class="truncate max-w-[160px]" title="${escapeHtml(r.fileName || 'archivo')}"><i class="fa-solid fa-paperclip mr-1"></i>${escapeHtml(r.fileName || 'archivo')}</span>
-                                    <span><i class="fa-solid fa-download"></i> ${r.downloads} descargas</span>
-                                </div>
-                            </div>
-
-                            <!-- Actions -->
+                    <div class="bg-dnd-card border border-dnd-border p-5 rounded-xl transition-all hover:border-dnd-borderLight">
+                        <div class="flex items-center justify-between mb-2">
                             <div class="flex items-center gap-2">
-                                <a href="${r.fileData}" target="_blank" download="${escapeHtml(r.fileName || 'recurso-dnd.bin')}" onclick="incrementDownload(${r.id})" 
-                                   class="flex-1 py-2 px-3 bg-gradient-to-r from-dnd-fire to-dnd-ember hover:from-dnd-ember hover:to-dnd-fire text-white font-heading text-xs font-bold rounded-lg transition-all text-center flex items-center justify-center gap-2 shadow-sm">
-                                    <i class="fa-solid fa-download"></i>
-                                    <span>Descargar Archivo</span>
-                                </a>
-                                <button onclick="likeResource(${r.id})" class="px-3 py-2 bg-dnd-dark hover:bg-dnd-border border border-dnd-border text-dnd-muted hover:text-dnd-fire rounded-lg text-xs transition-colors flex items-center gap-1">
-                                    <i class="fa-solid fa-heart"></i>
-                                    <span>${r.likes}</span>
-                                </button>
+                                <div class="w-8 h-8 rounded-full bg-dnd-dark border border-dnd-gold/40 flex items-center justify-center text-dnd-gold text-xs font-bold">
+                                    ${item.author.charAt(0)}
+                                </div>
+                                <div>
+                                    <span class="font-heading font-bold text-sm text-dnd-gold block leading-tight">${escapeHtml(item.author)}</span>
+                                    <span class="text-[10px] text-dnd-muted">${item.date}</span>
+                                </div>
                             </div>
+                            <span class="text-[11px] px-2.5 py-0.5 rounded-full border ${badgeColor} font-heading">
+                                ${categoryIcon} ${item.category}
+                            </span>
+                        </div>
+                        <p class="text-sm text-dnd-parchmentDark font-sans leading-relaxed mt-2">
+                            ${escapeHtml(item.message)}
+                        </p>
+                        <div class="mt-3 pt-3 border-t border-dnd-border/60 flex items-center justify-end">
+                            <button onclick="upvoteComment(${item.id})" class="text-xs text-dnd-muted hover:text-dnd-gold flex items-center gap-1.5 transition-colors">
+                                <i class="fa-regular fa-thumbs-up"></i>
+                                <span>Útil (${item.likes})</span>
+                            </button>
                         </div>
                     </div>
                 `;
             }).join('');
         }
 
-        // Like Resource
-        function likeResource(id) {
-            const res = currentResources.find(r => r.id === id);
-            if (res) {
-                res.likes++;
-                saveResources();
-                renderResources();
-                showToast('¡Añadido a tus favoritos!', 'info');
-            }
-        }
-
-        // Increment Download Count
-        function incrementDownload(id) {
-            const res = currentResources.find(r => r.id === id);
-            if (res) {
-                res.downloads++;
-                saveResources();
-                renderResources();
-            }
-        }
-
-        // Upload Resource Modal Handlers
-        function openUploadResourceModal() {
-            document.getElementById('resourceModal').classList.remove('hidden');
-        }
-
-        function closeUploadResourceModal() {
-            document.getElementById('resourceModal').classList.add('hidden');
-        }
-
-        // Handle Resource File Upload & Submit (Supabase Storage + Local Fallback)
-        async function handleResourceSubmit(e) {
-            e.preventDefault();
-            const title = document.getElementById('resTitle').value.trim();
-            const category = document.getElementById('resCategory').value;
-            const author = document.getElementById('resAuthor').value.trim();
-            const fileInput = document.getElementById('resFileInput');
-            const desc = document.getElementById('resDesc').value.trim();
-
-            if (!title || !author || !fileInput.files[0] || !desc) return;
-
-            const file = fileInput.files[0];
-            const btn = e.target.querySelector('button[type="submit"]');
-            const originalText = btn.innerHTML;
-
-            // Opción 1: Si el cliente de Supabase está activo y configurado
-            if (supabaseClient && SUPABASE_URL !== 'https://tu-proyecto.supabase.co') {
-                btn.disabled = true;
-                btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>Subiendo a Supabase Cloud...</span>';
-
-                try {
-                    // Generar un nombre único para evitar sobreescribir archivos con el mismo nombre
-                    const fileExt = file.name.split('.').pop();
-                    const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${fileExt}`;
-                    const filePath = `${category.toLowerCase()}/${fileName}`;
-
-                    // Subida física al bucket 'dnd-library' en Supabase Storage
-                    const { data: uploadData, error: uploadError } = await supabaseClient.storage
-                        .from('dnd-library')
-                        .upload(filePath, file);
-
-                    if (uploadError) throw uploadError;
-
-                    // Obtener la URL pública HTTPS para descargar
-                    const { data: urlData } = supabaseClient.storage
-                        .from('dnd-library')
-                        .getPublicUrl(filePath);
-
-                    const publicUrl = urlData.publicUrl;
-
-                    const newResource = {
-                        id: Date.now(),
-                        title: title,
-                        category: category,
-                        author: author,
-                        fileName: file.name,
-                        fileSize: formatBytes(file.size),
-                        fileData: publicUrl, // Enlace público directo a Supabase
-                        desc: desc,
-                        downloads: 0,
-                        likes: 0,
-                        date: 'Reciente'
-                    };
-
-                    currentResources.unshift(newResource);
-                    saveResources();
-                    renderResources();
-
-                    closeUploadResourceModal();
-                    e.target.reset();
-                    showToast('¡Archivo subido exitosamente a Supabase Storage!', 'success');
-
-                } catch (error) {
-                    console.error('Error al subir a Supabase:', error);
-                    showToast('Error en Supabase. Revisa las políticas o credenciales.', 'info');
-                } finally {
-                    btn.disabled = false;
-                    btn.innerHTML = originalText;
-                }
-            } 
-            // Opción 2: Fallback local Base64 si aún no has reemplazado tu SUPABASE_URL en el código
-            else {
-                if (file.size > 5 * 1024 * 1024) {
-                    showToast('Para la vista previa local sin Supabase, el archivo debe ser menor a 5MB.', 'info');
-                    return;
-                }
-
-                btn.disabled = true;
-                btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>Procesando archivo...</span>';
-
-                const reader = new FileReader();
-                reader.onload = function(uploadEvent) {
-                    const base64Data = uploadEvent.target.result;
-
-                    const newResource = {
-                        id: Date.now(),
-                        title: title,
-                        category: category,
-                        author: author,
-                        fileName: file.name,
-                        fileSize: formatBytes(file.size),
-                        fileData: base64Data,
-                        desc: desc,
-                        downloads: 0,
-                        likes: 0,
-                        date: 'Reciente'
-                    };
-
-                    currentResources.unshift(newResource);
-                    saveResources();
-                    renderResources();
-
-                    closeUploadResourceModal();
-                    e.target.reset();
-                    btn.disabled = false;
-                    btn.innerHTML = originalText;
-                    showToast('Guardado localmente. Coloca tus claves de Supabase para subidas globales a la nube.', 'info');
-                };
-
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // Helper to format bytes
-        function formatBytes(bytes, decimals = 2) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const dm = decimals < 0 ? 0 : decimals;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-        }
-
-        // Filter Resources by Category
-        function filterResources(cat) {
-            activeResourceFilter = cat;
-            document.querySelectorAll('.res-filter-btn').forEach(btn => {
+        function filterComments(category) {
+            activeFilter = category;
+            document.querySelectorAll('.comment-filter-btn').forEach(btn => {
                 btn.classList.remove('bg-dnd-border', 'text-dnd-gold');
                 btn.classList.add('bg-dnd-dark', 'text-dnd-muted');
             });
-            if (event && event.currentTarget) {
-                event.currentTarget.classList.remove('bg-dnd-dark', 'text-dnd-muted');
-                event.currentTarget.classList.add('bg-dnd-border', 'text-dnd-gold');
-            }
-            renderResources();
+            event.target.classList.remove('bg-dnd-dark', 'text-dnd-muted');
+            event.target.classList.add('bg-dnd-border', 'text-dnd-gold');
+            renderComments();
         }
 
-        // Render Comments to DOM
-        function renderComments() {
-            const container = document.getElementById('postsContainer');
-            const filtered = activeFilter === 'All' 
-                ? currentComments 
-                : currentComments.filter(c => c.category === activeFilter);
-
-            document.getElementById('commentsCount').innerText = currentComments.length;
-
-            if (filtered.length === 0) {
-                container.innerHTML = `
-                    <div class="p-8 text-center bg-dnd-card border border-dnd-border rounded-xl">
-                        <i class="fa-solid fa-scroll text-3xl text-dnd-muted mb-2"></i>
-                        <p class="text-sm text-dnd-muted">No hay mensajes en esta categoría aún.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            container.innerHTML = filtered.map(c => {
-                let badgeColor = 'bg-dnd-dark text-dnd-gold border-dnd-border';
-                if (c.category === 'Bug') badgeColor = 'bg-red-950/60 text-red-300 border-red-800/50';
-                if (c.category === 'Sugerencia') badgeColor = 'bg-amber-950/60 text-amber-300 border-amber-800/50';
-                if (c.category === 'Pregunta') badgeColor = 'bg-blue-950/60 text-blue-300 border-blue-800/50';
-
-                return `
-                    <div class="bg-dnd-card border border-dnd-border p-5 rounded-xl hover:border-dnd-borderLight transition-all">
-                        <div class="flex items-start justify-between gap-2 mb-3">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-dnd-dark border border-dnd-fire/40 flex items-center justify-center font-title text-dnd-gold text-lg">
-                                    ${c.author.charAt(0).toUpperCase()}
-                                </div>
-                                <div>
-                                    <h4 class="font-heading font-bold text-dnd-gold text-sm">${escapeHtml(c.author)}</h4>
-                                    <span class="text-[10px] text-dnd-muted">${c.date}</span>
-                                </div>
-                            </div>
-                            
-                            <span class="text-[11px] font-semibold px-2.5 py-1 rounded border ${badgeColor}">
-                                ${c.category}
-                            </span>
-                        </div>
-
-                        <p class="text-sm text-dnd-parchmentDark font-sans leading-relaxed mb-4">
-                            ${escapeHtml(c.message)}
-                        </p>
-
-                        <div class="flex items-center justify-between pt-3 border-t border-dnd-border/60 text-xs">
-                            <button onclick="upvoteComment(${c.id})" class="flex items-center gap-1.5 text-dnd-muted hover:text-dnd-fire transition-colors">
-                                <i class="fa-solid fa-thumbs-up"></i>
-                                <span>Aprobar (${c.upvotes})</span>
-                            </button>
-
-                            ${c.status ? `
-                                <span class="text-[10px] font-medieval text-dnd-fire">
-                                    ✦ Estado: ${c.status}
-                                </span>
-                            ` : ''}
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // Handle Feedback Submission (Taberna + Formspree Email Notification)
-        async function handleFeedbackSubmit(e) {
+        function handleFeedbackSubmit(e) {
             e.preventDefault();
-            const author = document.getElementById('authorName').value.trim();
+            const author = document.getElementById('authorName').value;
             const category = document.getElementById('feedbackCategory').value;
-            const message = document.getElementById('feedbackMessage').value.trim();
+            const message = document.getElementById('feedbackMessage').value;
 
             if (!author || !message) return;
 
-            const btn = document.getElementById('btnSubmitFeedback');
-            const originalText = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>Enviando...</span>';
-
-            // Local update for community board
             const newComment = {
                 id: Date.now(),
                 author: author,
                 category: category,
                 message: message,
-                date: 'Reciente',
-                upvotes: 1,
-                status: 'En Revisión'
+                date: "Justo ahora",
+                likes: 0
             };
 
-            currentComments.unshift(newComment);
-            saveComments();
+            commentsList.unshift(newComment);
             renderComments();
 
-            // Send notification to Formspree
-            try {
-                await fetch(FORMSPREE_ENDPOINT, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        _subject: `[DnD Taberna] Nuevo mensaje de ${author}`,
-                        Formulario: 'Tablón de la Taberna',
-                        Aventurero: author,
-                        Categoria: category,
-                        Mensaje: message
-                    })
-                });
-                showToast('¡Tu mensaje ha sido grabado en la Taberna y enviado al DM!', 'success');
-            } catch (err) {
-                showToast('Publicado en la Taberna localmente.', 'info');
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = originalText;
-                document.getElementById('feedbackForm').reset();
-            }
-        }
-
-        // Upvote comment
-        function upvoteComment(id) {
-            const comment = currentComments.find(c => c.id === id);
-            if (comment) {
-                comment.upvotes++;
-                saveComments();
-                renderComments();
-                showToast('Aprobación registrada', 'info');
-            }
-        }
-
-        // Filter Comments
-        function filterComments(cat) {
-            activeFilter = cat;
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('bg-dnd-border', 'text-dnd-gold');
-                btn.classList.add('bg-dnd-dark', 'text-dnd-muted');
-            });
-            if (event && event.target) {
-                event.target.classList.remove('bg-dnd-dark', 'text-dnd-muted');
-                event.target.classList.add('bg-dnd-border', 'text-dnd-gold');
-            }
-            renderComments();
-        }
-
-        // Beta Modal Handlers
-        function openBetaModal() {
-            document.getElementById('betaModal').classList.remove('hidden');
-        }
-
-        function closeBetaModal() {
-            document.getElementById('betaModal').classList.add('hidden');
-        }
-
-        // Privacy Modal Handlers
-        function openPrivacyModal() {
-            document.getElementById('privacyModal').classList.remove('hidden');
-        }
-
-        function closePrivacyModal() {
-            document.getElementById('privacyModal').classList.add('hidden');
-        }
-
-        // Handle Android Beta Registration (Formspree Email Endpoint)
-        async function handleBetaRegister(e) {
-            e.preventDefault();
-            const email = document.getElementById('betaEmail').value.trim();
-            const device = document.getElementById('betaDevice').value.trim();
-
-            if (!email) return;
-
-            const btn = document.getElementById('btnSubmitBeta');
-            const originalText = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>Registrando...</span>';
-
-            try {
-                await fetch(FORMSPREE_ENDPOINT, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        _subject: `[DnD Beta Tester] Nuevo registro: ${email}`,
-                        Formulario: 'Inscripción Beta Android',
-                        Correo: email,
-                        Dispositivo: device || 'No especificado'
-                    })
-                });
-                showToast('¡Excelente! Te hemos registrado como Tester.', 'success');
-                e.target.reset();
-                closeBetaModal();
-            } catch (err) {
-                showToast('Ocurrió un inconveniente al enviar la solicitud. Intenta nuevamente.', 'info');
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = originalText;
-            }
-        }
-
-        // Toast Notification System
-        function showToast(msg, type = 'info') {
-            const container = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
+            document.getElementById('feedbackForm').reset();
             
-            const bgColor = type === 'success' ? 'bg-dnd-card border-dnd-fire text-dnd-gold' : 'bg-dnd-card border-dnd-border text-dnd-parchment';
-            
-            toast.className = `p-4 rounded-xl border-2 shadow-2xl ${bgColor} flex items-center gap-3 transition-all transform translate-y-2 pointer-events-auto max-w-sm`;
-            toast.innerHTML = `
-                <i class="fa-solid fa-gem text-dnd-fire"></i>
-                <span class="text-xs font-semibold">${msg}</span>
-            `;
-
-            container.appendChild(toast);
-
+            // Temporary feedback notification on submit button
+            const btn = document.getElementById('btnSubmitFeedback');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = `<i class="fa-solid fa-check text-green-400"></i> <span>¡Publicado con Éxito!</span>`;
+            btn.classList.add('border', 'border-green-500');
             setTimeout(() => {
-                toast.classList.add('opacity-0', '-translate-y-2');
-                setTimeout(() => toast.remove(), 300);
-            }, 3500);
+                btn.innerHTML = originalHTML;
+                btn.classList.remove('border', 'border-green-500');
+            }, 3000);
         }
 
-        // Utility HTML Escape
+        function upvoteComment(id) {
+            const item = commentsList.find(c => c.id === id);
+            if (item) {
+                item.likes++;
+                renderComments();
+            }
+        }
+
         function escapeHtml(str) {
             return str.replace(/[&<>"']/g, function(m) {
                 return {
@@ -1472,60 +774,10 @@
             });
         }
 
-        // Canvas Ember Particle Background Effect
-        function initCanvasEmbers() {
-            const canvas = document.getElementById('emberCanvas');
-            const ctx = canvas.getContext('2d');
-
-            let width = canvas.width = window.innerWidth;
-            let height = canvas.height = window.innerHeight;
-
-            window.addEventListener('resize', () => {
-                width = canvas.width = window.innerWidth;
-                height = canvas.height = window.innerHeight;
-            });
-
-            const embers = [];
-            const count = 40;
-
-            for (let i = 0; i < count; i++) {
-                embers.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    size: Math.random() * 2 + 0.5,
-                    speedY: Math.random() * 0.8 + 0.2,
-                    speedX: (Math.random() - 0.5) * 0.5,
-                    opacity: Math.random() * 0.7 + 0.3,
-                    color: Math.random() > 0.5 ? '#FF8C00' : '#FFC857'
-                });
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, width, height);
-
-                embers.forEach(e => {
-                    e.y -= e.speedY;
-                    e.x += e.speedX;
-
-                    if (e.y < 0) {
-                        e.y = height;
-                        e.x = Math.random() * width;
-                    }
-
-                    ctx.beginPath();
-                    ctx.arc(e.x, e.y, e.size, 0, Math.PI * 2);
-                    ctx.fillStyle = e.color;
-                    ctx.globalAlpha = e.opacity;
-                    ctx.shadowBlur = 8;
-                    ctx.shadowColor = e.color;
-                    ctx.fill();
-                });
-
-                requestAnimationFrame(animate);
-            }
-
-            animate();
-        }
+        // Initialize feed on load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderComments();
+        });
     </script>
 </body>
 </html>
