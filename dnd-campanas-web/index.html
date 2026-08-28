@@ -121,7 +121,7 @@
                 </div>
             </a>
 
-            <!-- Desktop Nav (Biblioteca link removed) -->
+            <!-- Desktop Nav -->
             <nav class="hidden md:flex items-center gap-6 lg:gap-8 font-heading text-sm font-semibold tracking-wide">
                 <a href="#inicio" class="text-dnd-parchment hover:text-dnd-gold transition-colors flex items-center gap-2">
                     <i class="fa-solid fa-house text-xs text-dnd-fire"></i> Inicio
@@ -520,33 +520,152 @@
 
     <!-- PRIVACY POLICY MODAL -->
     <div id="privacyModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden">
-        <div class="bg-dnd-card border-2 border-dnd-borderLight rounded-xl max-w-xl w-full p-6 shadow-2xl relative max-h-[85vh] overflow-y-auto">
+        <div class="bg-dnd-card border-2 border-dnd-borderLight rounded-xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[85vh] overflow-y-auto">
             <button onclick="closePrivacyModal()" class="absolute top-4 right-4 text-dnd-muted hover:text-dnd-gold text-lg">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             
-            <h3 class="font-title text-2xl text-dnd-gold mb-2 flex items-center gap-2">
+            <h3 class="font-title text-2xl text-dnd-gold mb-1 flex items-center gap-2">
                 <i class="fa-solid fa-shield-halved text-dnd-fire"></i>
                 Política de Privacidad
             </h3>
-            <p class="text-xs text-dnd-muted mb-4">Última actualización: Agosto 2026</p>
+            <p class="text-xs text-dnd-muted mb-6">Última actualización: 06 de Agosto de 2026</p>
 
-            <div class="space-y-4 text-xs text-dnd-parchmentDark leading-relaxed">
-                <p>
-                    En <strong>DnD Campañas</strong> valoramos la privacidad de nuestra comunidad de aventureros. Esta política explica cómo manejamos los datos transmitidos en nuestra plataforma.
-                </p>
-                <h4 class="font-heading font-bold text-dnd-gold text-sm">1. Información Recopilada</h4>
-                <p>
-                    Recopilamos únicamente los datos proporcionados voluntariamente en el formulario de la Taberna (apodo de usuario, categoría y mensaje de retroalimentación).
-                </p>
-                <h4 class="font-heading font-bold text-dnd-gold text-sm">2. Uso de la Información</h4>
-                <p>
-                    La información se utiliza únicamente para el desarrollo continuo de la aplicación, corrección de errores reportados por los testers y la comunicación de mejoras.
-                </p>
-                <h4 class="font-heading font-bold text-dnd-gold text-sm">3. Almacenamiento Seguro</h4>
-                <p>
-                    Los mensajes transmitidos son almacenados de forma segura mediante servicios de infraestructura cloud. No vendemos ni compartimos datos con terceros.
-                </p>
+            <div class="space-y-6 text-xs sm:text-sm text-dnd-parchmentDark leading-relaxed">
+                
+                <!-- Section 1 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1">1. Introducción</h4>
+                    <p>
+                        Adrián Muñoz ("nosotros", "nuestro" o "el desarrollador") opera la aplicación móvil DnD Campañas (en adelante "el Servicio" o "la Aplicación"). Esta Política de Privacidad describe cómo recopilamos, usamos, almacenamos y protegemos su información personal cuando utiliza nuestro Servicio, y explica los derechos que usted tiene sobre sus datos. Al usar la Aplicación, usted acepta las prácticas descritas en este documento.
+                    </p>
+                </div>
+
+                <!-- Section 2 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1">2. Información que Recopilamos</h4>
+                    <p class="mb-2">Recopilamos los siguientes tipos de información para operar el Servicio:</p>
+                    <ul class="list-disc list-inside space-y-1.5 pl-2">
+                        <li><strong>Datos de cuenta:</strong> Dirección de correo electrónico y nombre de perfil, obtenidos al iniciar sesión mediante Google o Discord a través de Supabase Auth.</li>
+                        <li><strong>Datos de juego:</strong> Estadísticas de personajes, puntos de vida, inventario, hechizos, notas de campaña y configuraciones de la aplicación que usted crea y guarda voluntariamente.</li>
+                        <li><strong>Datos técnicos:</strong> Identificadores de sesión y tokens de autenticación necesarios para mantener su sesión activa de forma segura.</li>
+                    </ul>
+                    <p class="mt-2 text-dnd-muted text-xs">No recopilamos datos de ubicación, contactos del dispositivo, historial de llamadas, ni información financiera de ningún tipo.</p>
+                </div>
+
+                <!-- Section 3 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1">3. Uso de la Información</h4>
+                    <p class="mb-2">Utilizamos su información exclusivamente para los siguientes propósitos:</p>
+                    <ul class="list-disc list-inside space-y-1 pl-2">
+                        <li>Autenticar su identidad y permitirle acceder a su cuenta de forma segura.</li>
+                        <li>Sincronizar sus datos de juego entre dispositivos.</li>
+                        <li>Mantener el funcionamiento correcto del Servicio.</li>
+                        <li>Responder a solicitudes de soporte que usted inicie voluntariamente.</li>
+                    </ul>
+                    <p class="mt-2 font-semibold text-dnd-parchment">No compartimos, vendemos ni cedemos su información personal a terceros con fines comerciales ni publicitarios.</p>
+                </div>
+
+                <!-- Section 4 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1">4. Base Legal para el Tratamiento</h4>
+                    <p class="mb-2">Procesamos sus datos personales sobre las siguientes bases legales:</p>
+                    <ul class="list-disc list-inside space-y-1 pl-2">
+                        <li><strong>Consentimiento:</strong> Al crear una cuenta o iniciar sesión, usted acepta voluntariamente esta política.</li>
+                        <li><strong>Ejecución de contrato:</strong> Necesitamos procesar sus datos para prestarle el Servicio de sincronización y almacenamiento.</li>
+                        <li><strong>Interés legítimo:</strong> Para garantizar la seguridad e integridad del Servicio.</li>
+                    </ul>
+                </div>
+
+                <!-- Section 5 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1">5. Proveedores de Servicios (Terceros)</h4>
+                    <p class="mb-2">La Aplicación utiliza los siguientes servicios de terceros que pueden tener acceso a parte de su información para realizar funciones en nuestro nombre:</p>
+                    <ul class="list-disc list-inside space-y-1.5 pl-2">
+                        <li><strong>Supabase (supabase.com):</strong> Proporciona la base de datos en la nube y el servicio de autenticación. Sus datos se almacenan en servidores de Supabase. Consulte su política de privacidad en <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer" class="text-dnd-gold underline hover:text-dnd-fire">supabase.com/privacy</a>.</li>
+                        <li><strong>Google Sign-In:</strong> Permite iniciar sesión con su cuenta de Google. Consulte la política de privacidad de Google en <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-dnd-gold underline hover:text-dnd-fire">policies.google.com/privacy</a>.</li>
+                        <li><strong>Discord OAuth:</strong> Permite iniciar sesión con su cuenta de Discord. Consulte la política de privacidad de Discord en <a href="https://discord.com/privacy" target="_blank" rel="noopener noreferrer" class="text-dnd-gold underline hover:text-dnd-fire">discord.com/privacy</a>.</li>
+                        <li><strong>Google Play Services:</strong> Utilizados para la distribución de la aplicación en dispositivos Android y funciones básicas del sistema operativo.</li>
+                    </ul>
+                </div>
+
+                <!-- Section 6 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1">6. Permisos del Dispositivo</h4>
+                    <p class="mb-2">La Aplicación solicita los siguientes permisos en Android y los utiliza de la siguiente manera:</p>
+                    <ul class="list-disc list-inside space-y-1 pl-2">
+                        <li><code class="text-dnd-gold font-mono">INTERNET</code>: Necesario para conectarse a Supabase y sincronizar sus datos en la nube.</li>
+                        <li><code class="text-dnd-gold font-mono">ACCESS_NETWORK_STATE</code>: Permite detectar si hay conexión a internet para habilitar el modo offline.</li>
+                    </ul>
+                    <p class="mt-2 text-dnd-muted text-xs">No solicitamos permisos de cámara, micrófono, ubicación, contactos ni almacenamiento externo.</p>
+                </div>
+
+                <!-- Section 7 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1">7. Retención de Datos</h4>
+                    <p>
+                        Conservamos sus datos personales mientras su cuenta esté activa o sea necesario para prestarle el Servicio. Si solicita la eliminación de su cuenta, eliminaremos sus datos personales en un plazo máximo de 30 días, salvo que la ley exija conservarlos por más tiempo. Los datos de juego (personajes, notas, etc.) se eliminan junto con la cuenta.
+                    </p>
+                </div>
+
+                <!-- Section 8 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1">8. Seguridad</h4>
+                    <p class="mb-2">Implementamos medidas de seguridad técnicas y organizativas para proteger su información, incluyendo:</p>
+                    <ul class="list-disc list-inside space-y-1 pl-2">
+                        <li>Cifrado de datos en tránsito mediante HTTPS/TLS.</li>
+                        <li>Autenticación segura a través de tokens JWT gestionados por Supabase.</li>
+                        <li>Políticas de seguridad a nivel de fila (Row Level Security) en la base de datos para que cada usuario solo acceda a sus propios datos.</li>
+                    </ul>
+                    <p class="mt-2 text-dnd-muted text-xs">
+                        Sin embargo, ningún método de transmisión por Internet o almacenamiento electrónico es 100% seguro. Haremos todo lo posible para proteger su información, pero no podemos garantizar su seguridad absoluta.
+                    </p>
+                </div>
+
+                <!-- Section 9 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1">9. Privacidad de los Menores</h4>
+                    <p>
+                        Esta Aplicación no está dirigida a personas menores de 13 años. No recopilamos a sabiendas información personal de niños menores de 13 años. Si descubrimos que hemos recopilado datos de un menor de 13 años sin el consentimiento verificado de sus padres o tutores, eliminaremos esa información de inmediato. Si usted es padre o tutor y cree que su hijo nos ha proporcionado datos personales, contáctenos al correo indicado en la sección de Contacto.
+                    </p>
+                </div>
+
+                <!-- Section 10 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1">10. Sus Derechos sobre sus Datos</h4>
+                    <p class="mb-2">Usted tiene los siguientes derechos sobre su información personal:</p>
+                    <ul class="list-disc list-inside space-y-1 pl-2">
+                        <li><strong>Acceso:</strong> Puede solicitar una copia de los datos que tenemos sobre usted.</li>
+                        <li><strong>Rectificación:</strong> Puede corregir información inexacta directamente desde la Aplicación.</li>
+                        <li><strong>Eliminación:</strong> Puede solicitar la eliminación de su cuenta y todos sus datos enviando un correo a la dirección de contacto indicada abajo.</li>
+                        <li><strong>Portabilidad:</strong> Puede solicitar sus datos en un formato legible.</li>
+                        <li><strong>Oposición:</strong> Puede oponerse al tratamiento de sus datos en cualquier momento.</li>
+                    </ul>
+                    <p class="mt-2">
+                        Para ejercer cualquiera de estos derechos, contáctenos a través del correo indicado en la sección de Contacto. Responderemos en un plazo máximo de 30 días.
+                    </p>
+                </div>
+
+                <!-- Section 11 -->
+                <div>
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1">11. Cambios en esta Política</h4>
+                    <p>
+                        Podemos actualizar esta Política de Privacidad periódicamente para reflejar cambios en el Servicio o en la legislación aplicable. Le notificaremos cualquier cambio significativo publicando la nueva versión en esta página y actualizando la fecha de "Última actualización" en la parte superior. Le recomendamos revisar esta política periódicamente. El uso continuado de la Aplicación tras los cambios constituye su aceptación de la nueva política.
+                    </p>
+                </div>
+
+                <!-- Section 12 -->
+                <div class="p-4 bg-dnd-dark rounded-lg border border-dnd-border">
+                    <h4 class="font-heading font-bold text-dnd-gold text-base mb-1">12. Contacto</h4>
+                    <p class="mb-2">
+                        Si tiene alguna pregunta, comentario o solicitud relacionada con esta Política de Privacidad o el tratamiento de sus datos personales, puede contactarnos en:
+                    </p>
+                    <p class="font-bold text-dnd-gold">
+                        Email: <a href="mailto:dndcampanas@gmail.com" class="underline hover:text-dnd-fire">dndcampanas@gmail.com</a>
+                    </p>
+                    <p class="mt-2 text-xs text-dnd-muted">Nos comprometemos a responder en un plazo máximo de 30 días hábiles.</p>
+                </div>
+
             </div>
 
             <button onclick="closePrivacyModal()" class="w-full mt-6 py-2.5 bg-dnd-border hover:bg-dnd-borderLight text-dnd-gold font-heading text-xs rounded-lg font-bold">
